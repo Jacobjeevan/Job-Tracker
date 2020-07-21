@@ -15,7 +15,7 @@ class Job(models.Model):
     employer = models.CharField(max_length=100)
     apply_date = models.DateField(default=timezone.localdate)
     description = models.TextField()
-    #author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=3)
     #location = models.ForeignKey(Location, on_delete=models.CASCADE)

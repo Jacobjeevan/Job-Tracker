@@ -1,7 +1,7 @@
 import axios from "axios";
-import { createMessage } from "./messages";
+import { createMessage, returnErrorMessages } from "./messages";
 
-import { GET_JOBS, DELETE_JOBS, ADD_JOB, GET_ERRORS } from "./types";
+import { GET_JOBS, DELETE_JOBS, ADD_JOB } from "./types";
 
 export const getJobs = () => (dispatch) => {
   axios
@@ -12,7 +12,9 @@ export const getJobs = () => (dispatch) => {
         payload: res.data,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      dispatch(returnErrorMessages(err.response.data, err.response.status));
+    });
 };
 
 export const deleteJob = (id) => (dispatch) => {
@@ -25,7 +27,9 @@ export const deleteJob = (id) => (dispatch) => {
         payload: id,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      dispatch(returnErrorMessages(err.response.data, err.response.status));
+    });
 };
 
 export const addJob = (lead) => (dispatch) => {
@@ -39,13 +43,6 @@ export const addJob = (lead) => (dispatch) => {
       dispatch(createMessage({ jobAdded: "Job Added" }));
     })
     .catch((err) => {
-      const errors = {
-        message: err.response.data,
-        status: err.response.status,
-      };
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors,
-      });
+      dispatch(returnErrorMessages(err.response.data, err.response.status));
     });
 };
