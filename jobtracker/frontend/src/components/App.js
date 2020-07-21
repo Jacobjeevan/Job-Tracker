@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import Header from "./layout/Header";
-import JobsList from "./layout/jobs/JobsList";
-import Form from "./layout/jobs/Form";
+import Job from "./layout/jobs/Job";
 import { Provider } from "react-redux";
 import store from "../store";
 import { Provider as AlertProvider } from "react-alert";
@@ -19,10 +18,13 @@ class App extends Component {
     return (
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
-          <Header />
-          <Alerts />
-          <Form />
-          <JobsList />
+          <Fragment>
+            <Header />
+            <Alerts />
+            <div className="container">
+              <Job />
+            </div>
+          </Fragment>
         </AlertProvider>
       </Provider>
     );

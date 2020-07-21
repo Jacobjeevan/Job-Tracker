@@ -1,17 +1,14 @@
-import { Form } from "./Form";
-import { JobsList } from "./JobsList";
+import Form from "./Form";
+import JobsList from "./JobsList";
+import React, { Fragment } from "react";
 
-import React, { Component } from "react";
-
-export class Job extends Component {
-  render() {
-    return (
-      <div>
-        <Form />
-        <JobsList />
-      </div>
-    );
-  }
+function Job() {
+  return (
+    <Fragment>
+      <Form />
+      <JobsList />
+    </Fragment>
+  );
 }
 
 export default Job;
