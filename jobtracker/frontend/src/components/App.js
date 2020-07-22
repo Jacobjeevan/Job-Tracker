@@ -32,7 +32,7 @@ class App extends Component {
             <Fragment>
               <Header />
               <Alerts />
-              <div className="container">
+              <div className="container mt-4">
                 <Switch>
                   <Route exact path="/" component={Job} />
                   <Route exact path="/jobs" component={JobsList} />
