@@ -17,8 +17,12 @@ export class Alerts extends Component {
     }
 
     if (message !== prevProps.message) {
-      for (const [key, value] of Object.entries(message)) {
-        alert.success(`${value}`);
+      if (message.passwordDoNotMatch) {
+        alert.error(message.passwordDoNotMatch);
+      } else {
+        for (const [key, value] of Object.entries(message)) {
+          alert.success(`${value}`);
+        }
       }
     }
   }

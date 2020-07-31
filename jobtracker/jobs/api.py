@@ -11,7 +11,7 @@ class JobViewSet(viewsets.ModelViewSet):
     ]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(author=self.request.user)
 
 
 class LocationViewSet(viewsets.ModelViewSet):

@@ -1,11 +1,11 @@
 import axios from "axios";
 import { createMessage, returnErrorMessages } from "./messages";
-
 import { GET_JOBS, DELETE_JOBS, ADD_JOB } from "./types";
+import { tokenConfig } from "./auth";
 
-export const getJobs = () => (dispatch) => {
+export const getJobs = () => (dispatch, getState) => {
   axios
-    .get("/jobs/")
+    .get("/jobs/", tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: GET_JOBS,
@@ -17,9 +17,9 @@ export const getJobs = () => (dispatch) => {
     });
 };
 
-export const deleteJob = (id) => (dispatch) => {
+export const deleteJob = (id) => (dispatch, getState) => {
   axios
-    .delete(`/jobs/${id}/`)
+    .delete(`/jobs/${id}/`, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({ jobDeleted: "Job Deleted" }));
       dispatch({
@@ -32,9 +32,9 @@ export const deleteJob = (id) => (dispatch) => {
     });
 };
 
-export const addJob = (lead) => (dispatch) => {
+export const addJob = (lead) => (dispatch, getState) => {
   axios
-    .post("/jobs/", lead)
+    .post("/jobs/", lead, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: ADD_JOB,
