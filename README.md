@@ -1,10 +1,10 @@
 # Job Tracker
 
-The purpose of this project is to build a job tracker application (and learn React/Redux).
+Objective: Build a job tracker app to keep track jobs I have applied to (and learn React/Redux).
 
 An earlier version of this project was built using Django (frontend and backend), which is alive at jobtracker-django.herokuapp.com.
 
-This version aims to rebuild the project (keeping Django for Frontend, but building it with REST API for backend, and React for frontend).
+This version aims to rebuild the project (keeping Django for Frontend, but rebuilding it with REST API for backend, and React for frontend).
 
 ### Progress:
 
