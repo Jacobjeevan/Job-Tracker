@@ -32,9 +32,9 @@ export const deleteJob = (id) => (dispatch, getState) => {
     });
 };
 
-export const addJob = (lead) => (dispatch, getState) => {
+export const addJob = (job) => (dispatch, getState) => {
   axios
-    .post("/jobs/", lead, tokenConfig(getState))
+    .post("/jobs/", job, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: ADD_JOB,
