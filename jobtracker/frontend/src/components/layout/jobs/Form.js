@@ -49,7 +49,7 @@ export class Form extends Component {
     } = this.state;
     return (
       <div className="card">
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} className="m-4">
           <div className="form-group">
             <label>Job Title</label>
             <input
