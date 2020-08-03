@@ -1,0 +1,8 @@
+.mapContainer {
+  position: absolute;
+  top: 10;
+  bottom: 10;
+  width: 60vw;
+  height: 85vh;
+  box-shadow: 0px 3px 18px -11px;
+}
