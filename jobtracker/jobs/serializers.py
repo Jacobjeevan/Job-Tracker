@@ -6,7 +6,7 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = ['id', 'title', 'employer',
-                  'apply_date', 'description', 'city', 'state']
+                  'apply_date', 'description', 'city', 'state', 'location']
 
 
 class LocationSerializer(serializers.ModelSerializer):

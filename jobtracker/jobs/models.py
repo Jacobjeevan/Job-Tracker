@@ -18,7 +18,7 @@ class Job(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=3)
-    #location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"{self.title} with {self.employer}. Applied on {self.apply_date}"
