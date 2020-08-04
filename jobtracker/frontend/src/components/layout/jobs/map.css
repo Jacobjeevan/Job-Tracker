@@ -6,3 +6,8 @@
   height: 85vh;
   box-shadow: 0px 3px 18px -11px;
 }
+
+.marker {
+  width: 20px;
+  height: 20px;
+}
