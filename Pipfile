@@ -13,6 +13,7 @@ pylint = "*"
 autopep8 = "*"
 markdown = "*"
 django-filter = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"

@@ -15,8 +15,8 @@ This version aims to rebuild the project (keeping Django for Frontend, but rebui
 - [x] Authentication
   - [x] Register/Login pages
   - [x] Hiding specific routes such as add form
-- [ ] Integrating with Geolocation API to fetch location coordinates
-- [ ] Integrating with Mapbox API
+- [x] Integrating with Geolocation API to fetch location coordinates
+- [x] Integrating with Mapbox API
 - [ ] Adding autofill (locations) to add job form
 - [ ] Modifying UI for job display (Accordian style implemented for displaying map for each location)
 - [ ] Deploy
