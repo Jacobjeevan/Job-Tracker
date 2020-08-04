@@ -57,9 +57,9 @@ export class Header extends Component {
             </a>
             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
               <li className="nav-item active">
-                <a className="nav-link" href="#">
-                  Home <span className="sr-only">(current)</span>
-                </a>
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
               </li>
               <li className="nav-item">
                 <Link to="/new-job" className="nav-link">
