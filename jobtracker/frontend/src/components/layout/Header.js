@@ -72,7 +72,10 @@ export class Header extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="jobtracker-django.herokuapp.com/">
+                <a
+                  className="nav-link"
+                  href="http://jobtracker-django.herokuapp.com/"
+                >
                   Job Tracker - Django Frontend
                 </a>
               </li>
