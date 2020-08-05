@@ -7,8 +7,7 @@ import mapboxgl from "mapbox-gl";
 import "./map.css";
 import jobs from "../../../reducers/jobs";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiamVldmFuamFjb2Jqb2huIiwiYSI6ImNrYng0dzQwaTBtYnYydG9iZHd2ZGMwdzMifQ.tibdKDL-t805Ha1GawouUA";
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 class MapBox extends Component {
   constructor(props) {
