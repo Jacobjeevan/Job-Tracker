@@ -19,6 +19,7 @@
     "css-loader": "^4.2.0",
     "dotenv-webpack": "^2.0.0",
     "file-loader": "^6.0.0",
+    "redux-devtools-extension": "^2.13.8",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
@@ -35,7 +36,6 @@
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
   }
 }
