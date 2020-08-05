@@ -71,6 +71,14 @@ export class Header extends Component {
                   Jobs List
                 </Link>
               </li>
+              <li className="nav-item">
+                <a
+                  className="navbar-brand"
+                  href="jobtracker-django.herokuapp.com/"
+                >
+                  Job Tracker - Django Frontend
+                </a>
+              </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
           </div>
