@@ -1,0 +1,36 @@
+.card-btn-container {
+  display: flex;
+}
+
+.card-btn {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  color: black;
+  border: none;
+}
+
+.card-btn a:hover {
+  text-decoration: none;
+}
+
+.view-btn {
+  background-color: #2980b9;
+}
+
+.view-btn:hover {
+  background-color: #3498db;
+}
+
+.dlt-btn {
+  background-color: #c0392b;
+}
+
+.dlt-btn:hover {
+  background-color: #e74c3c;
+}
+
+.card-info {
+  text-align: center;
+  padding: 10px 15px 0px 15px;
+}
