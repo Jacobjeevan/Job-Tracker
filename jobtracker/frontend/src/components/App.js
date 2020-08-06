@@ -15,7 +15,7 @@ import PrivateRoute from "./common/PrivateRoute";
 import { loadUser } from "../actions/auth";
 
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
