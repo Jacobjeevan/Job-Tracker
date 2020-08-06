@@ -23,7 +23,7 @@ export const getJob = (id) => (dispatch, getState) => {
     .then((res) => {
       dispatch({
         type: GET_JOBS,
-        payload: id,
+        payload: [res.data],
       });
     })
     .catch((err) => {

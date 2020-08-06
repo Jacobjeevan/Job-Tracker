@@ -2,8 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getJobs, deleteJob } from "../../../actions/jobs";
-import { Switch, Route, Link, useRouteMatch } from "react-router-dom";
-import Jobdetail from "./Jobdetail";
+import { Link } from "react-router-dom";
 
 export class JobsList extends Component {
   static propTypes = {
@@ -18,7 +17,6 @@ export class JobsList extends Component {
   }
 
   render() {
-    /* let { path, url } = useRouteMatch(); */
     const { isAuthenticated } = this.props.auth;
     return (
       <Fragment>
@@ -44,11 +42,11 @@ export class JobsList extends Component {
                 <td>{job.description}</td>
                 <td>{job.city}</td>
                 <td>{job.state}</td>
-                {/* <td>
-                  <button className="btn btn-primary btn-sm">
-                    <Link to={`${url}\:${job.id}`}>View Job Detail</Link>
+                <td>
+                  <button className="btn btn-info btn-sm">
+                    <Link to={`/job/${job.id}`}>View Job Detail</Link>
                   </button>
-                </td> */}
+                </td>
                 {isAuthenticated == true && (
                   <td>
                     <button
@@ -59,9 +57,6 @@ export class JobsList extends Component {
                     </button>
                   </td>
                 )}
-                {/* <Switch>
-                  <Route exact path={`${path}/:jobid`} component={Jobdetail} />
-                </Switch> */}
               </tr>
             ))}
           </tbody>

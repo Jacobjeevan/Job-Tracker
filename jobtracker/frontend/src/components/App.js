@@ -13,6 +13,7 @@ import Login from "./users/Login";
 import Register from "./users/Register";
 import PrivateRoute from "./common/PrivateRoute";
 import { loadUser } from "../actions/auth";
+import Jobdetail from "./layout/jobs/Jobdetail";
 
 import {
   BrowserRouter as Router,
@@ -46,6 +47,7 @@ class App extends Component {
                   <PrivateRoute exact path="/new-job" component={Form} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path={`/job/:jobid`} component={Jobdetail} />
                 </Switch>
               </div>
             </Fragment>
