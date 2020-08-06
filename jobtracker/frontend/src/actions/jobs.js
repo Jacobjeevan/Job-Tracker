@@ -5,7 +5,7 @@ import { tokenConfig } from "./auth";
 
 export const getJobs = () => (dispatch, getState) => {
   axios
-    .get("/jobs/", tokenConfig(getState))
+    .get("/api/jobs/", tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: GET_JOBS,
@@ -19,7 +19,7 @@ export const getJobs = () => (dispatch, getState) => {
 
 export const getJob = (id) => (dispatch, getState) => {
   axios
-    .get(`/jobs/${id}/`, tokenConfig(getState))
+    .get(`/api/jobs/${id}/`, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: GET_JOBS,
@@ -33,7 +33,7 @@ export const getJob = (id) => (dispatch, getState) => {
 
 export const deleteJob = (id) => (dispatch, getState) => {
   axios
-    .delete(`/jobs/${id}/`, tokenConfig(getState))
+    .delete(`/api/jobs/${id}/`, tokenConfig(getState))
     .then((res) => {
       dispatch(createMessage({ jobDeleted: "Job Deleted" }));
       dispatch({
@@ -48,7 +48,7 @@ export const deleteJob = (id) => (dispatch, getState) => {
 
 export const addJob = (job) => (dispatch, getState) => {
   axios
-    .post("/jobs/", job, tokenConfig(getState))
+    .post("/api/jobs/", job, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: ADD_JOB,

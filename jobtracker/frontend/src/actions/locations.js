@@ -5,7 +5,7 @@ import { tokenConfig } from "./auth";
 
 export const getLocations = () => (dispatch, getState) => {
   axios
-    .get("/location/", tokenConfig(getState))
+    .get("/api/locations/", tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: GET_LOCATIONS,
