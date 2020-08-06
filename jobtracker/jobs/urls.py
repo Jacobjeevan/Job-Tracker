@@ -4,7 +4,7 @@ from django.urls import re_path, include
 
 router = routers.DefaultRouter()
 router.register(r'jobs', JobViewSet, 'jobs')
-router.register(r'location', LocationViewSet, 'locations')
+router.register(r'locations', LocationViewSet, 'locations')
 
 urlpatterns = [
     re_path(r'^', include(router.urls)),
