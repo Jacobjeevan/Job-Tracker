@@ -6,10 +6,10 @@ An earlier version of this project was built using Django (frontend and backend)
 
 This version aims to rebuild the project (keeping Django for Frontend, but rebuilding it with REST API for backend, and React for frontend).
 
-## Deployments:
+### Deployments:
 
-[Django with REST backend with React Frontend](https://jobtracker-react.herokuapp.com/)
-[Django backend with Django Frontend](https://jobtracker-django.herokuapp.com/)
+- [Django with REST backend with React Frontend](https://jobtracker-react.herokuapp.com/)
+- [Django backend with Django Frontend](https://jobtracker-django.herokuapp.com/)
 
 ### Progress:
 
