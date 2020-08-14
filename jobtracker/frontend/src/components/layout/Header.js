@@ -33,11 +33,11 @@ export class Header extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light ">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand">
             Job Tracker
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -51,9 +51,6 @@ export class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link to="/" className="nav-link mr-4">
-                Home
-              </Link>
               <Link to="/new-job" className="nav-link mr-4">
                 Add Job
               </Link>

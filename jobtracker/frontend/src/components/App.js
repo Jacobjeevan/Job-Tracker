@@ -14,13 +14,8 @@ import Register from "./users/Register";
 import PrivateRoute from "./common/PrivateRoute";
 import { loadUser } from "../actions/auth";
 import Jobdetail from "./layout/jobs/Jobdetail";
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
 
 const alertOptions = {
   timeout: 3000,
@@ -40,7 +35,7 @@ class App extends Component {
             <Fragment>
               <Header />
               <Alerts />
-              <div className="container mt-4">
+              <div className="container mt-5">
                 <Switch>
                   <Route exact path="/" component={MapBox} />
                   <Route exact path="/jobs" component={JobsList} />

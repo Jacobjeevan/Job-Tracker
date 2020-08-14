@@ -1,0 +1,10 @@
+.detail-container {
+  box-shadow: 0px 1px 18px -11px;
+  border-top: 5px #5c9ad9 solid;
+  background-color: white;
+}
+
+.card-detail {
+  margin: 10px;
+  padding: 50px;
+}

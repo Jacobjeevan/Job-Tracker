@@ -22,24 +22,14 @@ export class JobsList extends Component {
     const { isAuthenticated } = this.props.auth;
     return (
       <Fragment>
-        {/* <h1>Jobs List</h1>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Employer</th>
-              <th>Apply Date</th>
-              <th>Description</th>
-              <th>City</th>
-              <th>State</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody> */}
-        <div className="d-flex flex-wrap justify-content-between">
+        <div className="d-flex flex-wrap justify-content-flex-start">
           {this.props.jobs.map((job) => (
-            <div key={job.id} className="card mb-4" style={{ width: "18rem" }}>
-              <div className="container pr-0 pl-0">
+            <div
+              key={job.id}
+              className="card mb-4 mr-5 ml-5"
+              style={{ width: "18rem" }}
+            >
+              <div className="container card-container">
                 <div className="row card-info">
                   <div className="col">
                     <p>{job.employer}</p>

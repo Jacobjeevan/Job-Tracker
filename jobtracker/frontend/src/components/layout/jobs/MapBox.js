@@ -5,7 +5,6 @@ import { getLocations } from "../../../actions/locations";
 import { getJobs } from "../../../actions/jobs";
 import mapboxgl from "mapbox-gl";
 import "./map.css";
-import jobs from "../../../reducers/jobs";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
@@ -18,8 +17,6 @@ class MapBox extends Component {
       zoom: 2,
     };
   }
-
-  map;
 
   componentDidMount() {
     this.props.getJobs();

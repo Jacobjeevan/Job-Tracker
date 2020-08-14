@@ -1,5 +1,15 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  padding-right: 0;
+  height: 250px;
+  border-top: 5px #5c9ad9 solid;
+}
+
 .card-btn-container {
   display: flex;
+  order: 99;
 }
 
 .card-btn {
@@ -16,6 +26,8 @@
 
 .view-btn {
   background-color: #2980b9;
+  color: white;
+  font-weight: 300;
 }
 
 .view-btn:hover {
@@ -23,7 +35,9 @@
 }
 
 .dlt-btn {
+  color: white;
   background-color: #c0392b;
+  font-weight: 300;
 }
 
 .dlt-btn:hover {
@@ -33,4 +47,5 @@
 .card-info {
   text-align: center;
   padding: 10px 15px 0px 15px;
+  flex-grow: 2;
 }

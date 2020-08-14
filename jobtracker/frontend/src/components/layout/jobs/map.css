@@ -1,13 +1,20 @@
 .mapContainer {
   position: absolute;
-  top: 10;
-  bottom: 10;
-  width: 60vw;
-  height: 85vh;
+  margin-bottom: 40px;
+  width: 60%;
+  height: 80%;
   box-shadow: 0px 3px 18px -11px;
 }
 
 .marker {
   width: 20px;
   height: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .mapContainer {
+    width: 90% !important;
+    height: 80%;
+  }
 }
