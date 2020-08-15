@@ -14,7 +14,7 @@ export class Header extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
     const authLinks = (
-      <ul className="navbar-nav mt-2 mt-lg-0 auth-nav">
+      <ul className="navbar-nav mt-lg-0 auth-nav">
         <Link to="/login" onClick={this.props.logout} className="nav-link mr-4">
           Logout
         </Link>
@@ -22,7 +22,7 @@ export class Header extends Component {
     );
 
     const guestLinks = (
-      <ul className="navbar-nav mt-2 mt-lg-0 auth-nav">
+      <ul className="navbar-nav mt-lg-0 auth-nav">
         <Link to="/register" className="nav-link mr-4">
           Register
         </Link>
@@ -58,7 +58,7 @@ export class Header extends Component {
                 Jobs List
               </Link>
               <a
-                className="nav-link mr-4"
+                className="nav-link"
                 href="http://jobtracker-django.herokuapp.com/"
               >
                 Django Frontend Version
