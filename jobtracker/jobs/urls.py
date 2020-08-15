@@ -1,4 +1,4 @@
-from rest_framework import routers, viewsets
+from rest_framework import routers
 from .api import JobViewSet, LocationViewSet
 from django.urls import re_path, include
 

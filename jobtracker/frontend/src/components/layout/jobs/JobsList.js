@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getJobs, deleteJob } from "../../../actions/jobs";
-import { Link } from "react-router-dom";
 import LinkButton from "./LinkButton";
 import "./JobsList.css";
 
@@ -68,33 +67,6 @@ export class JobsList extends Component {
             </div>
           ))}
         </div>
-
-        {/* <tr key={job.id}>
-                <td>{job.title}</td>
-                <td>{job.employer}</td>
-                <td>{job.apply_date}</td>
-                <td>{job.description}</td>
-                <td>{job.city}</td>
-                <td>{job.state}</td>
-                <td>
-                  <button className="btn btn-info btn-sm">
-                    <Link to={`/job/${job.id}`}>View Job Detail</Link>
-                  </button>
-                </td>
-                {isAuthenticated == true && (
-                  <td>
-                    <button
-                      onClick={this.props.deleteJob.bind(this, job.id)}
-                      className="btn btn-danger btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
       </Fragment>
     );
   }

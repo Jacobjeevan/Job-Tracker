@@ -1,6 +1,6 @@
 from .models import Job, Location
 from .serializers import JobSerializer, LocationSerializer
-from rest_framework import viewsets, permissions, routers
+from rest_framework import viewsets, permissions
 import os
 import requests
 

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { getLocations } from "../../../actions/locations";
 import { getJobs } from "../../../actions/jobs";
 import mapboxgl from "mapbox-gl";
@@ -60,7 +59,7 @@ class MapBox extends Component {
   }
 
   addMarkerToMap(coordinates, popup) {
-    var marker = new mapboxgl.Marker(this.createDivElement())
+    new mapboxgl.Marker(this.createDivElement())
       .setLngLat(coordinates)
       .addTo(this.map)
       .setPopup(popup);
@@ -74,7 +73,6 @@ class MapBox extends Component {
   }
 
   render() {
-    let { jobs, locations } = this.props;
     return (
       <Fragment>
         <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />

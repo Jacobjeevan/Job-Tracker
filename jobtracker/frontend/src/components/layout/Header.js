@@ -12,7 +12,7 @@ export class Header extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
     const authLinks = (
       <ul className="navbar-nav mt-2 mt-lg-0 auth-nav">
         <Link to="/login" onClick={this.props.logout} className="nav-link mr-4">
