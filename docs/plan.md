@@ -68,7 +68,7 @@ Django, Database, Web scraping, React
 - Redo frontend in React
 - Deploy React version
 
-### Following has been scraped:
+### Following has been scrapped:
 
 - More attributes to form
 - Platform (select from existing entries or add a new one)
