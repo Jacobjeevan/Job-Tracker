@@ -6,6 +6,8 @@ An earlier version of this project was built using Django (frontend and backend)
 
 This version aims to rebuild the project (keeping Django for Frontend, but rebuilding it with REST API for backend, and React for frontend).
 
+Refer to [Plan](docs/plan.md) for detailed implementation plan of the project.
+
 ### Deployments:
 
 - [Django with REST backend with React Frontend](https://jobtracker-react.herokuapp.com/)
@@ -23,5 +25,5 @@ This version aims to rebuild the project (keeping Django for Frontend, but rebui
 - [x] Integrating with Geolocation API to fetch location coordinates
 - [x] Integrating with Mapbox API
 - [x] Initial Deployment
+- [x] Added cleaned up plan
 - [ ] Adding autofill (locations) to add job form
-- [ ] Modifying UI for job display (Accordian style implemented for displaying map for each location)
