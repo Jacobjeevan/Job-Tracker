@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getJob } from "../../../actions/jobs";
+import { getJob } from "../../../actions/jobDetail";
 import "./Jobdetail.css";
 
 class Jobdetail extends Component {
   static propTypes = {
-    jobs: PropTypes.array.isRequired,
+    jobDetail: PropTypes.array.isRequired,
     getJob: PropTypes.func.isRequired,
   };
 
@@ -15,7 +15,7 @@ class Jobdetail extends Component {
   }
 
   render() {
-    let job = this.props.jobs.pop();
+    let job = this.props.jobDetail.pop();
     return (
       <div>
         {job ? (
@@ -41,7 +41,7 @@ class Jobdetail extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  jobs: state.jobs.jobs,
+  jobDetail: state.jobDetail.jobDetail,
 });
 
 export default connect(mapStateToProps, { getJob })(Jobdetail);

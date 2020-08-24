@@ -12,3 +12,4 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_LOCATIONS = "GET_LOCATIONS";
+export const GET_JOB_BY_ID = "GET_JOB_BY_ID";

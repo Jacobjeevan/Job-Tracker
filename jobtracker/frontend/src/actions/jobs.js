@@ -17,20 +17,6 @@ export const getJobs = () => (dispatch, getState) => {
     });
 };
 
-export const getJob = (id) => (dispatch, getState) => {
-  axios
-    .get(`/api/jobs/${id}/`, tokenConfig(getState))
-    .then((res) => {
-      dispatch({
-        type: GET_JOBS,
-        payload: [res.data],
-      });
-    })
-    .catch((err) => {
-      dispatch(returnErrorMessages(err.response.data, err.response.status));
-    });
-};
-
 export const deleteJob = (id) => (dispatch, getState) => {
   axios
     .delete(`/api/jobs/${id}/`, tokenConfig(getState))
