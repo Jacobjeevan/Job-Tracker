@@ -6,7 +6,7 @@ An earlier version of this project was built using Django (frontend and backend)
 
 This version aims to rebuild the project (keeping Django for Frontend, but rebuilding it with REST API for backend, and React for frontend).
 
-Refer to [Plan](docs/plan.md) for detailed implementation plan of the project.
+Refer to [Plan](docs/plan.md) for detailed implementation plan of the project. You are also welcome to checkout [lessons](docs/lessons.md) for a list of things (including mistakes) I learned from implementing these two projects.
 
 ### Deployments:
 
