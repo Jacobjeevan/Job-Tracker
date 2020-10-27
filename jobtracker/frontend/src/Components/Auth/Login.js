@@ -10,18 +10,18 @@ const defaultAuth = {
 
 export default function Login() {
   const [auth, setAuth] = useState(defaultAuth);
-  const { isAuthenticated, storeToken } = useContext(AppContext);
+  const { isAuthenticated, storeAuth } = useContext(AppContext);
 
   async function onSubmit(e) {
     e.preventDefault();
-    let token = await login(auth);
-    storeToken(token);
+    let data = await login(auth);
+    storeAuth(data);
   }
 
   function onChange(e) {
     setAuth({
-      [e.target.name]: e.target.value,
       ...auth,
+      [e.target.name]: e.target.value,
     });
   }
 

@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../Auth/authAPI";
 import { AppContext } from "./AppContext";
 import "./Header.css";
 
 export default function Header() {
-  const { isAuthenticated, storeToken, token } = useContext(AppContext);
+  const { isAuthenticated, clearUser, token } = useContext(AppContext);
 
   const handleLogout = () => {
     logout(token);
-    storeToken(null);
+    clearUser();
   };
   const authLinks = (
     <ul className="navbar-nav mt-lg-0 auth-nav">

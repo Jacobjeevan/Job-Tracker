@@ -1,65 +1,70 @@
-import React, { Fragment, useState } from "react";
-import Header from "./components/layout/Header";
-import MapBox from "./components/layout/jobs/MapBox";
-import JobsList from "./components/layout/jobs/JobsList";
-import Login from "./components/users/Login";
-import Register from "./components/users/Register";
-import PrivateRoute from "./components/common/PrivateRoute";
-import { loadUser } from "./actions/auth";
+import React, { Fragment, useState, useEffect } from "react";
+import Header from "./Components/Common/Header";
+import Dashboard from "./Components/Main/Dashboard";
+import { loadUser } from "./Components/Auth/authAPI";
 import { AppContext } from "./Components/Common/AppContext";
-import Job from "./Components/Jobs/Job";
-import Form from "./Components/Main/Form";
-import { Route, Switch } from "react-router-dom";
 import "./App.css";
+import { getJobs } from "./Components/Jobs/jobsAPI";
+import { getLocations } from "./Components/Locations/locationsAPI";
+import AuthDashboard from "./Components/Main/AuthDashboard";
+
+const defaultUser = { user: null, token: null, isAuthenticated: false };
 
 export default function App() {
-  const [user, setUser] = useState();
-  const [token, setToken] = useState();
+  const [auth, setAuth] = useState(defaultUser);
+  const [data, setData] = useState({ jobs: [], locations: [] });
 
-  const isAuthenticated = () => {
-    if (user) {
-      return true;
-    }
-    return false;
-  };
+  let { user, isAuthenticated, token } = auth;
 
-  function storeToken(token) {
+  function storeAuth(authData) {
+    let { user, token } = authData;
     localStorage.setItem("token", token);
-    setToken(token);
+    setAuth({ user, token, isAuthenticated: true });
+  }
+
+  function clearUser() {
+    localStorage.setItem("token", null);
+    setAuth(defaultUser);
   }
 
   useEffect(() => {
     async function getUserFromSession() {
-      let foundToken = token ? token : localStorage.getItem("token");
-      if (foundToken) {
-        let foundUser = loadUser(foundToken);
+      let foundToken = token
+        ? token
+        : JSON.parse(localStorage.getItem("token"));
+      if (!user && foundToken) {
+        let foundUser = await loadUser(foundToken);
         if (foundUser) {
-          setUser(foundUser);
+          setAuth({
+            user: foundUser,
+            token: foundToken,
+            isAuthenticated: true,
+          });
         }
       }
     }
 
+    async function getData() {
+      let jobsData = await getJobs(token);
+      let locationsData = await getLocations(token);
+      setData({ jobs: jobsData, locations: locationsData });
+    }
     getUserFromSession();
-  }, []);
+    getData();
+  }, [auth, token, user]);
 
   return (
     <Fragment>
-      <AppContext.Provider value={{ isAuthenticated, token, setToken }}>
+      <AppContext.Provider value={{ isAuthenticated, token, clearUser }}>
         <Header />
       </AppContext.Provider>
       <div className="container mt-5">
-        <Switch>
-          <AppContext.Provider value={{ isAuthenticated, user, token }}>
-            <Route exact path="/" component={MapBox} />
-            <Route exact path="/jobs" component={JobsList} />
-            <PrivateRoute exact path="/new-job" component={Form} />
-            <Route exact path={`/job/:jobid`} component={Job} />
-          </AppContext.Provider>
-          <AppContext.Provider value={{ isAuthenticated, storeToken }}>
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-          </AppContext.Provider>
-        </Switch>
+        <AppContext.Provider value={{ isAuthenticated, token, data }}>
+          <Dashboard />
+        </AppContext.Provider>
+        <AppContext.Provider value={{ isAuthenticated, storeAuth }}>
+          <AuthDashboard />
+        </AppContext.Provider>
       </div>
     </Fragment>
   );

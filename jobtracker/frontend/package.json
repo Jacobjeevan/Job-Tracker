@@ -18,6 +18,9 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "css-loader": "^4.2.0",
     "dotenv-webpack": "^2.0.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "file-loader": "^6.0.0",
     "redux-devtools-extension": "^2.13.8",
     "style-loader": "^1.2.1",
@@ -25,6 +28,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "axios": "^0.19.2",
     "mapbox-gl": "^1.11.1",
     "prop-types": "^15.7.2",
@@ -36,6 +40,7 @@
     "react-router-dom": "^5.2.0",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "swr": "^0.3.6"
   }
 }
