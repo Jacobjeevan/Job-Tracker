@@ -28,8 +28,22 @@ async function createNewUser(params) {
   }
 }
 
+async function getUserById(Id) {
+    try {
+      let user = await User.findOne({
+        where: {
+          Id,
+        },
+      });
+      return user ? user : null;
+    } catch (error) {
+      throw new Error(`Could not find if user exists - ${error}`);
+    }
+  }
+
 module.exports = {
   getUserByEmail,
   hashPassword,
   createNewUser,
+  getUserById
 };

@@ -37,8 +37,9 @@ const verifyToken = (req, res, next) => {
         console.log(err); // Token has expired, has been tampered with, etc
         handleError(res, 404, "Token could be validated. Please login again.");
       } else {
-        const { scope } = verifiedJwt.body;
+        const { scope, sub } = verifiedJwt.body;
         req.body.scope = scope;
+        req.body.userId = sub;
         console.log(verifiedJwt); // Will contain the header and body
         next();
       }
