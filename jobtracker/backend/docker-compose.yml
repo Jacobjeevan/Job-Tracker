@@ -1,0 +1,15 @@
+version: "3"
+services:
+  jt-backend_db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=jobtracker_db
+      - POSTGRES_USER=jeevan_jobtracker
+      - POSTGRES_PASSWORD=u9Dcti7ty7akgYYG3gOt
+    ports:
+      - 5433:5432
+
+volumes:
+  postgres_data:
