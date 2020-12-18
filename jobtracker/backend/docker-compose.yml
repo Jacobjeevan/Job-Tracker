@@ -4,10 +4,6 @@ services:
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_DB=jobtracker_db
-      - POSTGRES_USER=jeevan_jobtracker
-      - POSTGRES_PASSWORD=u9Dcti7ty7akgYYG3gOt
     ports:
       - 5433:5432
 
