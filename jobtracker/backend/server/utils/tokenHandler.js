@@ -49,8 +49,22 @@ const verifyToken = (req, res, next) => {
   }
 };
 
+const checkPermissions = (req, res, next) => {
+  const { scope } = req.body;
+  if (scope === "user") {
+    next();
+  } else {
+    return handleError(
+      res,
+      404,
+      "Unauthorized operation - You don't have permission to do that!"
+    );
+  }
+};
+
 module.exports = {
   generateToken,
   verifyToken,
   getTokenFromHeader,
+  checkPermissions,
 };
