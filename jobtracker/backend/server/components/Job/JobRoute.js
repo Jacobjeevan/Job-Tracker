@@ -42,3 +42,5 @@ router.delete(
   checkPermissions,
   async (req, res) => {}
 );
+
+module.exports = router;

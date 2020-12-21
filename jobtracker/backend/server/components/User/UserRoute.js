@@ -1,4 +1,4 @@
-const router = require("express").router(),
+const router = require("express").Router();
   bcrypt = require("bcrypt"),
   UserRepo = require("./UserRepo"),
   { handleError } = require("../../utils/errors"),
@@ -55,7 +55,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  res.redirect("/");
+  res.status(200).json("Logout successful");
 });
 
 module.exports = router;
