@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-const dbConnection = require("../../db/connection"),
-  Job = require("../Job/JobModel");
+const dbConnection = require("../../db/connection");
 
 class Location extends Model {}
 
@@ -26,13 +25,9 @@ Location.init(
     },
   },
   {
-    dbConnection,
+    sequelize: dbConnection,
     modelName: "Location",
   }
 );
-
-Location.hasMany(Job, {
-  foreignKey: "location",
-});
 
 module.exports = Location;

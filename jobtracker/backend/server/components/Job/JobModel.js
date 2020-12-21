@@ -34,7 +34,7 @@ Job.init(
     },
   },
   {
-    dbConnection,
+    sequelize: dbConnection,
     modelName: "Job",
   }
 );
