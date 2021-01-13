@@ -1,7 +1,7 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const dbConnection = require("../../db/connection"),
   Location = require("../Location/LocationModel"),
-  User = require("../User/UserModel");
+  Users = require("../User/UserModel");
 
 class Job extends Model {}
 
@@ -42,7 +42,7 @@ Job.init(
 Job.belongsTo(Location, {
   foreignKey: "location",
 });
-Job.belongsTo(User, {
+Job.belongsTo(Users, {
   foreignKey: "author",
 });
 

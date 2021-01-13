@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
         return res.status(200).json({ token: generateToken(user.id, false) });
       }
     }
-    handleError(res, 403, "Username/password incorrect");
+    handleError(res, 403, "Email/password incorrect");
   } catch (error) {
     handleError(res, 400, error);
   }

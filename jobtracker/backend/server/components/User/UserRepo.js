@@ -1,9 +1,9 @@
-const User = require("./UserModel"),
+const Users = require("./UserModel"),
   bcrypt = require("bcrypt");
 
 async function getUserByEmail(emailId) {
   try {
-    let user = await User.findOne({
+    let user = await Users.findOne({
       where: {
         email: emailId,
       },
@@ -21,7 +21,7 @@ async function hashPassword(password) {
 
 async function createNewUser(params) {
   try {
-    const user = await User.create(params);
+    const user = await Users.create(params);
     return user ? user : null;
   } catch (error) {
     throw new Error(`Could not create new user - ${error}`);
@@ -30,7 +30,7 @@ async function createNewUser(params) {
 
 async function getUserById(Id) {
     try {
-      let user = await User.findOne({
+      let user = await Users.findOne({
         where: {
           Id,
         },

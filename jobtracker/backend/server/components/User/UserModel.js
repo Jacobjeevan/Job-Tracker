@@ -1,14 +1,10 @@
 const { Model, DataTypes } = require("sequelize");
 const dbConnection = require("../../db/connection");
 
-class User extends Model {}
+class Users extends Model {}
 
-User.init(
+Users.init(
   {
-    username: {
-      type: DataTypes.STRING(100),
-      allowNull: false,
-    },
     email: {
       type: DataTypes.STRING(100),
       allowNull: false,
@@ -20,8 +16,8 @@ User.init(
   },
   {
     sequelize: dbConnection,
-    modelName: "User",
+    modelName: "Users",
   }
 );
 
-module.exports = User;
+module.exports = Users;
