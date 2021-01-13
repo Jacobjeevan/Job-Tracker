@@ -25,6 +25,12 @@ try {
   console.log("Unable to connect to Database.");
 }
 
+const UserRouter = require("./components/User/UserRoute");
+const JobRouter = require("./components/Job/JobRoute");
+
+app.use("/api/", JobRouter);
+app.use("/auth/", UserRouter);
+
 app.listen(port, () => {
   console.log(`Server is currently running on port: ${port}`);
 });
