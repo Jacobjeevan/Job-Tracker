@@ -6,7 +6,7 @@ const claims = (userId, isDefaultUser) => {
   let scope = "user";
   if (isDefaultUser) scope = "testUser";
   return {
-    iss: `${BACKEND_URL}`,
+    iss: `${process.env.BACKEND_URL}`,
     sub: userId,
     scope,
   };
