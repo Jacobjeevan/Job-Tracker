@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 
 const agent = chai.request.agent(server);
 const Users = require("../server/components/User/UserModel");
-const UserRepo = require("../server/components/User/UserRepo"); 
+const UserRepo = require("../server/components/User/UserRepo");
 const dbConnection = require("../server/db/connection");
 
 const userReq = {
@@ -18,7 +18,7 @@ const userReq = {
 describe("Users", () => {
   beforeEach(async () => {
     await Users.destroy({
-      where: {}
+      where: {},
     });
   });
 
@@ -26,12 +26,33 @@ describe("Users", () => {
     agent
       .post("/auth/register")
       .send(userReq)
-      .end((registerErr, registerRes) => {
+      .end((_registerErr, registerRes) => {
         registerRes.should.have.status(200);
         registerRes.body.should.have.property("token");
         done();
       });
   });
-  //it("Login route - Should return a token", (done) => {});
+
+  describe("Login route", () => {
+    before(async () => {
+      const hashedPass = await UserRepo.hashPassword(userReq.password);
+      await UserRepo.createNewUser({
+        email: userReq.email.toLowerCase(),
+        password: hashedPass,
+      });
+    });
+
+    it("Should return a token", (done) => {
+      agent
+        .post("/auth/login")
+        .send({ email: userReq.email, password: userReq.password })
+        .end((_loginErr, loginRes) => {
+          loginRes.should.have.status(200);
+          loginRes.body.should.have.property("token");
+          done();
+        });
+    });
+  });
+
   //it("Auth route - Token should return user account", (done) => {});
 });
