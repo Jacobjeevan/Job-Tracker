@@ -55,10 +55,7 @@ export default function Header() {
             <Link to="/jobs" className="nav-link mr-4">
               Jobs List
             </Link>
-            <a
-              className="nav-link"
-              href="http://jobtracker-django.herokuapp.com/"
-            >
+            <a className="nav-link" href="http://jt-django.jeevan.link/">
               Django Frontend Version
             </a>
             {isAuthenticated ? authLinks : guestLinks}
