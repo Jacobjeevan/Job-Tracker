@@ -15,13 +15,13 @@ const userReq = {
   passwordConfirm: "d00mTest12",
 };
 
-describe("Users", () => {
-  beforeEach(async () => {
-    await Users.destroy({
-      where: {},
-    });
+beforeEach(async () => {
+  await Users.destroy({
+    where: {},
   });
+});
 
+describe("Users", () => {
   it("Register route - Should return a token", (done) => {
     agent
       .post("/auth/register")
@@ -33,8 +33,8 @@ describe("Users", () => {
       });
   });
 
-  describe("Login route", () => {
-    before(async () => {
+  describe("Authenticated User", () => {
+    beforeEach(async () => {
       const hashedPass = await UserRepo.hashPassword(userReq.password);
       await UserRepo.createNewUser({
         email: userReq.email.toLowerCase(),
@@ -42,7 +42,14 @@ describe("Users", () => {
       });
     });
 
-    it("Should return a token", (done) => {
+    afterEach((done) => {
+      agent.get("/auth/logout").end((_loginErr, logoutRes) => {
+        logoutRes.should.have.status(200);
+        done();
+      });
+    });
+
+    it("Login route - Should return a token", (done) => {
       agent
         .post("/auth/login")
         .send({ email: userReq.email, password: userReq.password })
@@ -50,6 +57,28 @@ describe("Users", () => {
           loginRes.should.have.status(200);
           loginRes.body.should.have.property("token");
           done();
+        });
+    });
+
+    it("Token should return a User", (done) => {
+      agent
+        .post("/auth/login")
+        .send({ email: userReq.email, password: userReq.password })
+        .end((_loginErr, loginRes) => {
+          loginRes.should.have.status(200);
+          loginRes.body.should.have.property("token");
+          const token = loginRes.body.token;
+
+          agent
+            .get("/auth/user")
+            .set("authorization", `Token ${token}`)
+            .end((_getUserErr, getUserRes) => {
+              getUserRes.should.have.status(200);
+              getUserRes.body.should.have.property("user");
+              getUserRes.body.should.have.property("token");
+              getUserRes.body.token.should.be.equal(token);
+              done();
+            });
         });
     });
   });

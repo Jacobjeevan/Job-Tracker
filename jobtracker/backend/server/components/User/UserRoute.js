@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = require("express").Router(),
   bcrypt = require("bcrypt"),
   UserRepo = require("./UserRepo"),
   { handleError } = require("../../utils/errors"),

@@ -7,7 +7,8 @@ const dbConnection = new Sequelize(
   {
     host: `${process.env.POSTGRES_HOST}`,
     port: `${process.env.POSTGRES_PORT}`,
-    dialect: 'postgres'
+    dialect: "postgres",
+    logging: false,
   }
 );
 
