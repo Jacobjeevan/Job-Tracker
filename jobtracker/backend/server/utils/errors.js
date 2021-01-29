@@ -1,23 +1,24 @@
 const handleError = (res, code, errorMsg) => {
-    let statusCode = 400;
-    let error;
-  
-    if (typeof errorMsg === "object") {
-      statusCode = errorMsg.statusCode;
-      error = errorMsg;
-    } else if (typeof errorMsg === "string") {
-      error = { msg: errorMsg };
-    }
-  
-    statusCode = code || statusCode;
-  
-    console.log(error);
-  
-    res.status(statusCode).json({
-      statusCode,
-      error,
-    });
-  };
-  
-  module.exports = { handleError };
-  
+  let statusCode = 400;
+  let error;
+
+  if (typeof errorMsg === "object") {
+    statusCode = errorMsg.statusCode;
+    const { param, msg } = errorMsg;
+    error = `${msg} - ${param}`;
+  } else if (typeof errorMsg === "string") {
+    error = errorMsg;
+  }
+
+  statusCode = code || statusCode;
+
+  console.log(error);
+
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    error,
+  });
+};
+
+module.exports = { handleError };

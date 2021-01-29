@@ -9,9 +9,9 @@ const addDefaultUser = async (req, res, next) => {
   let token = getTokenFromHeader(req);
   if (token) {
     next();
-  } else {
+  } else if (req.path === "/defaultUser") {
     try {
-      const user = await getUserByEmail("testUser@test.com");
+      const user = await getUserByEmail("testuser@test.com");
       req.headers.authorization = `Token ${generateToken(user.id, true)}`;
       next();
     } catch (error) {

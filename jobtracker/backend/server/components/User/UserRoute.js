@@ -9,16 +9,21 @@ const router = require("express").Router(),
   } = require("../../utils/tokenHandler"),
   { addDefaultUser } = require("./UserHelper");
 
-router.get("/user", addDefaultUser, verifyToken, async (req, res) => {
-  try {
-    const { userId } = req.body;
-    const user = await UserRepo.getUserById(userId);
-    const token = getTokenFromHeader(req);
-    return res.status(200).json({ user: user, token: token });
-  } catch (error) {
-    handleError(res, 403, "Could not get user");
+router.get(
+  ["/user/", "/defaultUser"],
+  addDefaultUser,
+  verifyToken,
+  async (req, res) => {
+    try {
+      const { userId } = req.body;
+      const user = await UserRepo.getUserById(userId);
+      const token = getTokenFromHeader(req);
+      return res.status(200).json({ success: true, user: user, token: token });
+    } catch (error) {
+      handleError(res, 403, "Could not get user");
+    }
   }
-});
+);
 
 router.post("/register", async (req, res) => {
   const { email, password } = req.body;
@@ -32,7 +37,9 @@ router.post("/register", async (req, res) => {
         email: email.toLowerCase(),
         password: hashedPass,
       });
-      return res.status(200).json({ token: generateToken(user.id, false) });
+      return res
+        .status(200)
+        .json({ success: true, token: generateToken(user.id, false) });
     }
   } catch (error) {
     handleError(res, 400, error);
@@ -45,7 +52,9 @@ router.post("/login", async (req, res) => {
     const user = await UserRepo.getUserByEmail(email.toLowerCase());
     if (user) {
       if (await bcrypt.compare(password, user.password)) {
-        return res.status(200).json({ token: generateToken(user.id, false) });
+        return res
+          .status(200)
+          .json({ success: true, token: generateToken(user.id, false) });
       }
     }
     handleError(res, 403, "Email/password incorrect");
