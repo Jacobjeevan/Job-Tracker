@@ -44,6 +44,7 @@ Job.belongsTo(Location, {
 });
 Job.belongsTo(Users, {
   foreignKey: "author",
+  as: "Author",
 });
 
 module.exports = Job;
