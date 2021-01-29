@@ -11,24 +11,13 @@ if (process.env.NODE_ENV === "PRODUCTION") {
   dotenv.config({ path: "./.env.test" });
 }
 
-const dbConnection = require("./db/connection");
 const app = express();
 const port = process.env.PORT || 5000;
+const connectDB = require("./db/dbHelper");
 
 app.use(express.json());
 
-try {
-  dbConnection.authenticate().then(() => {
-    console.log("Succesfully connected to Database.");
-    const syncDB = async () => {
-      await dbConnection.sync({ alter: true });
-      console.log("Synchronized DB");
-    };
-    syncDB();
-  });
-} catch (error) {
-  console.log("Unable to connect to Database.");
-}
+connectDB();
 
 const UserRouter = require("./components/User/UserRoute");
 const JobRouter = require("./components/Job/JobRoute");
