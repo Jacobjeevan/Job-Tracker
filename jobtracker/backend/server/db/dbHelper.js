@@ -1,17 +1,18 @@
+const logger = require("../utils/logger");
 const dbConnection = require("./connection");
 
 const connectDB = () => {
   try {
     dbConnection.authenticate().then(() => {
-      console.log("Succesfully connected to Database.");
+      logger.info("Succesfully connected to Database.");
       const syncDB = async () => {
         await dbConnection.sync({ alter: true });
-        console.log("Synchronized DB");
+        logger.info("Synchronized DB");
       };
       syncDB();
     });
   } catch (error) {
-    console.log("Unable to connect to Database.");
+    logger.error("Unable to connect to Database.");
   }
 };
 

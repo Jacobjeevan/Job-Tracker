@@ -1,6 +1,7 @@
 var nJwt = require("njwt");
 const signingKey = process.env.TOKEN_SECRET;
 const { handleError } = require("./errors");
+const logger = require("./logger");
 
 const claims = (userId, isDefaultUser) => {
   let scope = "user";
@@ -34,13 +35,13 @@ const verifyToken = (req, res, next) => {
   if (token) {
     nJwt.verify(token, signingKey, function (err, verifiedJwt) {
       if (err) {
-        console.log(err); // Token has expired, has been tampered with, etc
+        logger.error(err); // Token has expired, has been tampered with, etc
         handleError(res, 404, "Token could be validated. Please login again.");
       } else {
         const { scope, sub } = verifiedJwt.body;
         req.body.scope = scope;
         req.body.userId = sub;
-        console.log(verifiedJwt); // Will contain the header and body
+        logger.debug(verifiedJwt); // Will contain the header and body
         next();
       }
     });

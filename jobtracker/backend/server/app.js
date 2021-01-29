@@ -1,7 +1,10 @@
 const express = require("express"),
   cors = require("cors"),
   helmet = require("helmet"),
-  dotenv = require("dotenv");
+  dotenv = require("dotenv"),
+  log4js = require("log4js"),
+  logger = require("./utils/logger"),
+  morgan = require("morgan");
 
 dotenv.config({ path: "./.env" });
 
@@ -13,6 +16,12 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+if (process.env.NODE_ENV === "dev") {
+  app.use(morgan("dev"));
+}
+app.use(log4js.connectLogger(logger, { level: "info" }));
+
 const connectDB = require("./db/dbHelper");
 
 app.use(express.json());
@@ -26,7 +35,7 @@ app.use("/api/", JobRouter);
 app.use("/auth/", UserRouter);
 
 app.listen(port, () => {
-  console.log(`Server is currently running on port: ${port}`);
+  logger.info(`Server is currently running on port: ${port}`);
 });
 
 module.exports = app;
