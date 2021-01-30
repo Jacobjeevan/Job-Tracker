@@ -11,8 +11,13 @@ export default function JobDetail() {
 
   useEffect(() => {
     async function getJob() {
-      let job = await getJobById(jobid, token);
-      setJob(job);
+      const APIresponse = await getJobById(jobid, token);
+      const { success, job, error } = APIresponse;
+      if (success) {
+        setJob(job);
+      } else if (error) {
+        console.log("Error loading job by id");
+      }
     }
     getJob();
   }, [jobid, token]);
