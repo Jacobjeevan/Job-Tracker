@@ -41,7 +41,15 @@ router.delete(
   "/jobs/:jobId",
   verifyToken,
   checkPermissions,
-  async (req, res) => {}
+  async (req, res) => {
+    const { jobId } = req.params;
+    try {
+      await JobRepo.deleteJobById(jobId);
+      return res.status(200).json({ success: true });
+    } catch (error) {
+      handleError(res, 400, error);
+    }
+  }
 );
 
 module.exports = router;

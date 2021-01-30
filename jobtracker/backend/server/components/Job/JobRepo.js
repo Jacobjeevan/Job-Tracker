@@ -63,8 +63,22 @@ async function createJob(params) {
   }
 }
 
+async function deleteJobById(jobId) {
+  try {
+    await Job.destroy({
+      where: {
+        id: jobId,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error(`Could not get Job By Id - ${error}`);
+  }
+}
+
 module.exports = {
   getAllJobs,
   getJobById,
   createJob,
+  deleteJobById,
 };

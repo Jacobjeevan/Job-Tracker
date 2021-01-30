@@ -17,6 +17,14 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(helmet());
+
+const corsOptions = {
+  origin: true,
+  credentials: true,
+};
+app.use(cors(corsOptions));
+
 if (process.env.NODE_ENV === "dev") {
   app.use(morgan("dev"));
 }
