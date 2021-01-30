@@ -1,17 +1,19 @@
-# Job Tracker
+# Job Tracker (React Frontend/Django Backend)
 
-Objective: Build a job tracker app to keep track jobs I have applied to (and learn React/Redux).
+#### Objectives
 
-An earlier version of this project was built using Django (frontend and backend), which is alive at jobtracker-django.herokuapp.com.
+- Build a job tracker app to keep track jobs I have applied to.
+- Rebuild the app in other languages to learn and strength my understanding of other languages
 
-This version aims to rebuild the project (keeping Django for Frontend, but rebuilding it with REST API for backend, and React for frontend).
+This version rebuilds the project - Reworks Django to user REST API and uses React for frontend.
 
-Refer to [Plan](docs/plan.md) for detailed implementation plan of the project. You are also welcome to checkout [lessons](docs/lessons.md) for a list of things (including mistakes) I learned from implementing these two projects.
+I reworked the project once and switched to Node.js for backend (while modifying frontend to integrate bettwe with the new backend).
 
-### Deployments:
+Refer to [Plan](docs/plan.md) for detailed implementation plan of the project. You are also welcome to checkout [lessons](docs/lessons.md) for a list of things (including mistakes) I learned from implementing the project.
 
-- [Django with REST backend with React Frontend](https://jobtracker-react.herokuapp.com/)
-- [Django backend with Django Frontend](https://jobtracker-django.herokuapp.com/)
+### Deployments :rocket:
+
+- [Job Tracker](https://jobtracker-react.herokuapp.com/): Deployed on Heroku
 
 ### Progress:
 
@@ -26,4 +28,16 @@ Refer to [Plan](docs/plan.md) for detailed implementation plan of the project. Y
 - [x] Integrating with Mapbox API
 - [x] Initial Deployment
 - [x] Added cleaned up plan
-- [ ] Adding autofill (locations) to add job form
+- [x] Refactor frontend
+  - Functional components, removing Redux and using React context
+- [x] Rewrite backend in Node.js
+  - [x] Add backend tests
+  - [ ] Modify frontend to integrate with new backend (In Progress)
+- [ ] Deploy containers on Digital Ocean Droplet using Dokku
+- [ ] Frontend redesign
+  - [ ] Redesign frontend to use Tailwind CSS framework
+  - [ ] Add a frontend landing page
+- [ ] New Features
+  - [ ] Toast for notifications
+  - [ ] Autofill support for form location
+    - [ ] Slight refactor for location model to use label/region, instead of city and state (allows for worldwide support; Currently backend API is restricted to US)
