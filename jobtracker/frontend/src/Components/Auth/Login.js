@@ -14,8 +14,13 @@ export default function Login() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    let data = await login(auth);
-    storeAuth(data);
+    const APIresponse = await login(auth);
+    const { success, token, error } = APIresponse;
+    if (success) {
+      storeAuth({ user: null, token });
+    } else if (error) {
+      console.log("Error logging in");
+    }
   }
 
   function onChange(e) {

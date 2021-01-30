@@ -4,7 +4,6 @@ import { register } from "./authAPI";
 import { AppContext } from "../Common/AppContext";
 
 const defaultAuth = {
-  username: "",
   email: "",
   password: "",
   password2: "",
@@ -16,8 +15,13 @@ export default function Register() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    let data = await register(auth);
-    storeAuth(data);
+    let APIresponse = await register(auth);
+    const { success, token, error } = APIresponse;
+    if (success) {
+      storeAuth({ user: null, token });
+    } else if (error) {
+      console.log("Error registering user");
+    }
   }
 
   function onChange(e) {
@@ -33,16 +37,6 @@ export default function Register() {
       <div className="card card-body mt-5">
         <h2 className="text-center">Register</h2>
         <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              type="text"
-              className="form-control"
-              name="username"
-              onChange={onChange}
-              value={auth.username}
-            />
-          </div>
           <div className="form-group">
             <label>Email</label>
             <input
