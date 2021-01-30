@@ -5,7 +5,6 @@ import { loadUser } from "./Components/Auth/authAPI";
 import { AppContext } from "./Components/Common/AppContext";
 import "./App.css";
 import { getJobs } from "./Components/Jobs/jobsAPI";
-import { getLocations } from "./Components/Locations/locationsAPI";
 import AuthDashboard from "./Components/Main/AuthDashboard";
 
 const defaultUser = { user: null, token: null, isAuthenticated: false };
@@ -18,12 +17,12 @@ export default function App() {
 
   function storeAuth(authData) {
     let { user, token } = authData;
-    localStorage.setItem("token", token);
+    localStorage.setItem("token", JSON.stringify(token));
     setAuth({ user, token, isAuthenticated: true });
   }
 
   function clearUser() {
-    localStorage.setItem("token", null);
+    localStorage.setItem("token", JSON.stringify(null));
     setAuth(defaultUser);
   }
 
@@ -33,21 +32,30 @@ export default function App() {
         ? token
         : JSON.parse(localStorage.getItem("token"));
       if (!user && foundToken) {
-        let foundUser = await loadUser(foundToken);
-        if (foundUser) {
+        const APIresponse = await loadUser(foundToken);
+        const { success, user, token, error } = APIresponse;
+        if (success) {
           setAuth({
-            user: foundUser,
-            token: foundToken,
+            user,
+            token,
             isAuthenticated: true,
           });
+        } else if (error) {
+          console.log("Error loading user");
         }
       }
     }
 
     async function getData() {
-      let jobsData = await getJobs(token);
-      let locationsData = await getLocations(token);
-      setData({ jobs: jobsData, locations: locationsData });
+      if (token) {
+        const APIresponse = await getJobs(token);
+        const { success, jobs, error } = APIresponse;
+        if (success) {
+          setData({ jobs });
+        } else if (error) {
+          console.log("Error loading jobs data");
+        }
+      }
     }
     getUserFromSession();
     getData();
@@ -55,7 +63,9 @@ export default function App() {
 
   return (
     <Fragment>
-      <AppContext.Provider value={{ isAuthenticated, token, clearUser }}>
+      <AppContext.Provider
+        value={{ isAuthenticated, token, clearUser, storeAuth }}
+      >
         <Header />
       </AppContext.Provider>
       <div className="container mt-5">
