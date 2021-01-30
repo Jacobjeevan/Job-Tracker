@@ -1,18 +1,40 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { logout } from "../Auth/authAPI";
+import { loadDefaultUser, logout } from "../Auth/authAPI";
 import { AppContext } from "./AppContext";
 import "./Header.css";
 
 export default function Header() {
-  const { isAuthenticated, clearUser, token } = useContext(AppContext);
+  const { isAuthenticated, clearUser, token, storeAuth } = useContext(
+    AppContext
+  );
 
-  const handleLogout = () => {
-    logout(token);
+  const handleLogout = async () => {
+    await logout(token);
     clearUser();
   };
+
+  const loginTest = async () => {
+    const APIresponse = await loadDefaultUser();
+    const { success, user, token, error } = APIresponse;
+    if (success) {
+      storeAuth({ user, token });
+    } else if (error) {
+      console.log("Error loading default user");
+    }
+  };
+
   const authLinks = (
     <ul className="navbar-nav mt-lg-0 auth-nav">
+      <Link to="/map" className="nav-link mr-4">
+        Map Page
+      </Link>
+      <Link to="/new-job" className="nav-link mr-4">
+        Add Job
+      </Link>
+      <Link to="/jobs" className="nav-link mr-4">
+        Jobs List
+      </Link>
       <Link to="/login" onClick={handleLogout} className="nav-link mr-4">
         Logout
       </Link>
@@ -27,6 +49,9 @@ export default function Header() {
       <Link to="/login" className="nav-link mr-4">
         Login
       </Link>
+      <button className="nav-link mr-4" onClick={async () => await loginTest()}>
+        Login as Test User
+      </button>
     </ul>
   );
 
@@ -49,12 +74,6 @@ export default function Header() {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <Link to="/new-job" className="nav-link mr-4">
-              Add Job
-            </Link>
-            <Link to="/jobs" className="nav-link mr-4">
-              Jobs List
-            </Link>
             <a
               className="nav-link"
               href="http://jobtracker-django.herokuapp.com/"
