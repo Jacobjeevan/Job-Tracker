@@ -1,10 +1,13 @@
-import axios from "axios";
 import { tokenConfig } from "../Auth/authAPI";
 import useSWR from "swr";
+import { axiosInstance } from "../../axios";
 
 export async function getJobById(id, token) {
   try {
-    let response = await axios.get(`/api/jobs/${id}/`, tokenConfig(token));
+    let response = await axiosInstance.get(
+      `/api/jobs/${id}/`,
+      tokenConfig(token)
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -13,7 +16,7 @@ export async function getJobById(id, token) {
 
 export async function getJobs(token) {
   try {
-    let response = await axios.get("/api/jobs/", tokenConfig(token));
+    let response = await axiosInstance.get("/api/jobs/", tokenConfig(token));
     return response.data;
   } catch (error) {
     console.log(error);
@@ -23,7 +26,7 @@ export async function getJobs(token) {
 export function useGetJobs(token) {
   const { data, error, mutate } = useSWR(
     "jobsData",
-    axios.get("/api/jobs/", tokenConfig(token)).then((res) => {
+    axiosInstance.get("/api/jobs/", tokenConfig(token)).then((res) => {
       return res.data;
     })
   );
@@ -38,7 +41,10 @@ export function useGetJobs(token) {
 
 export async function deleteJob(id, token) {
   try {
-    let response = await axios.delete(`/api/jobs/${id}/`, tokenConfig(token));
+    let response = await axiosInstance.delete(
+      `/api/jobs/${id}/`,
+      tokenConfig(token)
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -47,7 +53,11 @@ export async function deleteJob(id, token) {
 
 export async function addJob(job, token) {
   try {
-    let response = await axios.post("/api/jobs/", job, tokenConfig(token));
+    let response = await axiosInstance.post(
+      "/api/jobs/",
+      job,
+      tokenConfig(token)
+    );
     return response.data;
   } catch (error) {
     console.log(error);

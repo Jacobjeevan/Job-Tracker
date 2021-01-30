@@ -1,11 +1,11 @@
-import axios from "axios";
 import { tokenConfig } from "../Auth/authAPI";
 import useSWR from "swr";
+import { axiosInstance } from "../../axios";
 
 export function useGetLocations(token) {
   const { data, error, mutate } = useSWR(
     "locationsData",
-    axios.get("/api/locations/", tokenConfig(token)).then((res) => {
+    axiosInstance.get("/api/locations/", tokenConfig(token)).then((res) => {
       res.data;
     })
   );
@@ -19,7 +19,10 @@ export function useGetLocations(token) {
 
 export async function getLocations(token) {
   try {
-    let response = await axios.get("/api/locations/", tokenConfig(token));
+    let response = await axiosInstance.get(
+      "/api/locations/",
+      tokenConfig(token)
+    );
     return response.data;
   } catch (error) {
     console.log(error);
