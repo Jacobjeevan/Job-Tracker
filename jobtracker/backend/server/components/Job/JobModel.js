@@ -21,7 +21,7 @@ Job.init(
       defaultValue: Sequelize.fn("NOW"),
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(3500),
       allowNull: false,
     },
     city: {
