@@ -16,8 +16,6 @@ export default function Form() {
   const [formValues, setFormValues] = useState(defaultValues);
   const { token } = useContext(AppContext);
 
-  console.log(token);
-
   function onChange(e) {
     setFormValues({
       ...formValues,
