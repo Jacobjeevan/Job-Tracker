@@ -3,18 +3,18 @@ const signingKey = process.env.TOKEN_SECRET;
 const { handleError } = require("./errors");
 const logger = require("./logger");
 
-const claims = (userId, isDefaultUser) => {
+const claims = (UserId, isDefaultUser) => {
   let scope = "user";
   if (isDefaultUser) scope = "testUser";
   return {
     iss: `${process.env.BACKEND_URL}`,
-    sub: userId,
+    sub: UserId,
     scope,
   };
 };
 
-const generateToken = (userId, isDefaultUser) => {
-  const tokenClaim = claims(userId, isDefaultUser);
+const generateToken = (UserId, isDefaultUser) => {
+  const tokenClaim = claims(UserId, isDefaultUser);
   var jwt = nJwt.create(tokenClaim, signingKey);
   var token = jwt.compact();
   return token;
@@ -40,7 +40,7 @@ const verifyToken = (req, res, next) => {
       } else {
         const { scope, sub } = verifiedJwt.body;
         req.body.scope = scope;
-        req.body.userId = sub;
+        req.body.UserId = sub;
         logger.debug(verifiedJwt); // Will contain the header and body
         next();
       }

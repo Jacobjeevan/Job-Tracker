@@ -30,11 +30,7 @@ async function createNewUser(params) {
 
 async function getUserById(id) {
   try {
-    let user = await Users.findOne({
-      where: {
-        id,
-      },
-    });
+    let user = await Users.findByPk(id);
     return user ? user : null;
   } catch (error) {
     throw new Error(`Could not find if user exists - ${error}`);

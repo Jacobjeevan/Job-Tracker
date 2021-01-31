@@ -15,8 +15,8 @@ router.get(
   verifyToken,
   async (req, res) => {
     try {
-      const { userId } = req.body;
-      const user = await UserRepo.getUserById(userId);
+      const { UserId } = req.body;
+      const user = await UserRepo.getUserById(UserId);
       const token = getTokenFromHeader(req);
       return res.status(200).json({ success: true, user: user, token: token });
     } catch (error) {

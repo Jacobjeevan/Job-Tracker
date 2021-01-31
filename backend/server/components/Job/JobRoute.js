@@ -6,8 +6,8 @@ const router = require("express").Router(),
 // Get all Jobs
 router.get("/jobs", verifyToken, async (req, res) => {
   try {
-    const { userId } = req.body;
-    const allJobs = await JobRepo.getAllJobs(userId);
+    const { UserId } = req.body;
+    const allJobs = await JobRepo.getAllJobs(UserId);
     return res.status(200).json({ success: true, jobs: allJobs });
   } catch (error) {
     handleError(res, 400, error);
@@ -27,9 +27,9 @@ router.get("/jobs/:jobId", verifyToken, async (req, res) => {
 
 // Create a new Job
 router.post("/jobs/", verifyToken, checkPermissions, async (req, res) => {
-  const { userId } = req.body;
+  const { UserId } = req.body;
   try {
-    const newJob = await JobRepo.createJob({ ...req.body, userId });
+    const newJob = await JobRepo.createJob({ ...req.body, UserId });
     return res.status(200).json({ success: true, job: newJob });
   } catch (error) {
     handleError(res, 400, error);
