@@ -1,11 +1,23 @@
 version: "3"
 services:
-  jt-backend_db:
+  db:
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5433:5432
 
+  db_test:
+    image: postgres
+    volumes:
+      - postgres_data_test:/var/lib/postgresql/data/
+    ports:
+      - 5434:5432
+    environment:
+      - POSTGRES_DB=jobtracker_db_test
+      - POSTGRES_USER=jobtracker_test
+      - POSTGRES_PASSWORD=te$tPA$$W0RD
+
 volumes:
   postgres_data:
+  postgres_data_test:
