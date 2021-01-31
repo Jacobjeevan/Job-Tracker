@@ -44,7 +44,7 @@ const seedData = async (exit) => {
 
     await Promise.all(
       sampleJobs.map(async (job) => {
-        await JobRepo.createJob({ ...job, userId: newUser.id });
+        await JobRepo.createJob({ ...job, UserId: newUser.id });
       })
     );
     const foundJob = await Job.findOne({
@@ -54,12 +54,8 @@ const seedData = async (exit) => {
       },
     });
 
-    logger.info("Seeder completed", {
-      type: "seeder_completed",
-      jobId: foundJob.id,
-      title: foundJob.title,
-      employer: foundJob.employer,
-    });
+    logger.info(foundJob);
+    logger.info("Sucessfully seeded database.");
 
     if (exit) {
       process.exit(1);
@@ -71,15 +67,13 @@ const seedData = async (exit) => {
   }
 };
 
-if (process.env.NODE_ENV === "dev") {
-  connectDB();
+connectDB();
 
-  if (process.argv[2] === "-d") {
-    destroyData(true);
-  } else if (process.argv[2] === "-i") {
-    seedData(true);
-  } else {
-    destroyData(false);
-    seedData(true);
-  }
+if (process.argv[2] === "-d") {
+  destroyData(true);
+} else if (process.argv[2] === "-i") {
+  seedData(true);
+} else {
+  destroyData(false);
+  seedData(true);
 }

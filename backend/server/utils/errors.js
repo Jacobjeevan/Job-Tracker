@@ -5,6 +5,7 @@ const handleError = (res, code, errorMsg) => {
   let error;
 
   if (typeof errorMsg === "object") {
+    logger.debug(errorMsg);
     statusCode = errorMsg.statusCode;
     const { param, msg } = errorMsg;
     error = `${msg} - ${param}`;
