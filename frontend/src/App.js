@@ -11,7 +11,7 @@ const defaultUser = { user: null, token: null, isAuthenticated: false };
 
 export default function App() {
   const [auth, setAuth] = useState(defaultUser);
-  const [data, setData] = useState({ jobs: [], locations: [] });
+  const [data, setData] = useState({ jobs: [] });
 
   let { user, isAuthenticated, token } = auth;
 

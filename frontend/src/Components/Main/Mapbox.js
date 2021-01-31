@@ -13,7 +13,7 @@ const defaultMapValues = {
 
 export default function Mapbox() {
   const { data } = useContext(AppContext);
-  let { jobs, locations } = data;
+  let { jobs } = data;
   const mapContainer = useRef(null);
 
   useEffect(() => {
@@ -29,16 +29,11 @@ export default function Mapbox() {
     });
 
     function addMarker() {
-      jobs.map((job) => {
-        if (job.location !== null && locations.length !== null) {
-          let curLocation = locations.find(
-            (location) => location.id === job.location
-          );
-          let lat = curLocation.latitude;
-          let lng = curLocation.longitude;
-          var popup = getPopup(job.title);
-          addMarkerToMap([lng, lat], popup);
-        }
+      jobs.forEach((job) => {
+        let lat = job.Location.latitude;
+        let lng = job.Location.longitude;
+        var popup = getPopup(job.title);
+        addMarkerToMap([lng, lat], popup);
       });
     }
 
@@ -65,7 +60,7 @@ export default function Mapbox() {
     }
 
     return () => map.remove();
-  }, [jobs, locations]);
+  }, [jobs]);
 
   return (
     <Fragment>
