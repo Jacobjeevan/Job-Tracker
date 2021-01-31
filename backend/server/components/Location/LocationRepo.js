@@ -1,9 +1,10 @@
+const logger = require("../../utils/logger");
 const Location = require("./LocationModel"),
   { fetchCoordinates } = require("./LocationHelper");
 
 async function getLocationByCityState(city, state) {
   try {
-    const location = Location.findOne({
+    const location = await Location.findOne({
       where: {
         city,
         state,
@@ -33,7 +34,7 @@ async function createNewLocation(city, state) {
 async function getLocation(params) {
   try {
     const { city, state } = params;
-    let newLocation = getLocationByCityState(city, state);
+    let newLocation = await getLocationByCityState(city, state);
     if (!newLocation) {
       newLocation = await createNewLocation(city, state);
     }
