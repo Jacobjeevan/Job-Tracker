@@ -1,16 +1,23 @@
 const dbConnection = require("../../db/connection"),
   Job = require("./JobModel"),
+  Location = require("../Location/LocationModel"),
+  Users = require("../User/UserModel"),
   { getUserById } = require("../User/UserRepo"),
   { getLocation } = require("../Location/LocationRepo");
 
-async function getAllJobs(userId) {
+async function getAllJobs(UserId) {
   try {
-    const allJobs = await Job.findAll({
-      where: {
-        author: userId,
+    const user = await Users.findByPk(UserId, {
+      include: {
+        model: Job,
+        include: {
+          model: Location,
+          as: "Location",
+        },
       },
     });
-    return allJobs;
+    const { Jobs } = user;
+    return Jobs;
   } catch (error) {
     throw new Error(`Could not get all Jobs - ${error}`);
   }
@@ -18,9 +25,10 @@ async function getAllJobs(userId) {
 
 async function getJobById(jobId) {
   try {
-    const job = await Job.findOne({
-      where: {
-        id: jobId,
+    const job = await Job.findByPk(jobId, {
+      include: {
+        model: Location,
+        as: "Location",
       },
     });
     return job ? job : null;
@@ -30,11 +38,11 @@ async function getJobById(jobId) {
 }
 
 async function getJobsByLocation(params) {
-  const { city, state, userId } = params;
+  const { city, state, UserId } = params;
   try {
     const job = await Job.findOne({
       where: {
-        author: userId,
+        UserId,
         city,
         state,
       },
@@ -47,14 +55,14 @@ async function getJobsByLocation(params) {
 
 async function createJob(params) {
   try {
-    const { city, state, userId } = params;
+    const { city, state, UserId } = params;
     const job = await dbConnection.transaction(async (t) => {
       const newLocation = await getLocation({ city, state });
-      const author = await getUserById(userId);
+      const author = await getUserById(UserId);
       const newJob = await Job.create(params, { transaction: t });
       await newJob.setLocation(newLocation, { transaction: t });
       await newJob.setAuthor(author, { transaction: t });
-
+      await author.addJob(newJob, { transaction: t });
       return newJob;
     });
     return job;
