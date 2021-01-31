@@ -10,6 +10,8 @@ const UserRepo = require("../server/components/User/UserRepo");
 const Job = require("../server/components/Job/JobModel");
 const JobRepo = require("../server/components/Job/JobRepo");
 const Location = require("../server/components/Location/LocationModel");
+const dbConnection = require("../server/db/connection");
+const logger = require("../server/utils/logger");
 
 const jobReq = {
   title: "Job 1",
@@ -58,6 +60,20 @@ const userReq = {
 
 let newJob;
 
+before((done) => {
+  dbConnection
+    .sync({ alter: true, force: true })
+    .then(() => {
+      logger.info("Successfully synced the DB");
+      done();
+    })
+    .catch((err) => {
+      logger.error("Error syncing the DB");
+      logger.error(err);
+      done(false);
+    });
+});
+
 describe("Jobs", () => {
   before(async () => {
     await Users.destroy({
@@ -74,13 +90,13 @@ describe("Jobs", () => {
       email: userReq.email.toLowerCase(),
       password: hashedPass,
     });
-    newJob = await JobRepo.createJob({ ...jobReq, userId: newUser.id });
+    newJob = await JobRepo.createJob({ ...jobReq, UserId: newUser.id });
     const testUser = await UserRepo.createNewUser({
       email: "testuser@test.com",
       password: hashedPass,
     });
     sampleJobs.forEach(async (job) => {
-      await JobRepo.createJob({ ...job, userId: testUser.id });
+      await JobRepo.createJob({ ...job, UserId: testUser.id });
     });
   });
 
@@ -160,7 +176,7 @@ describe("Jobs", () => {
             resGet.body.should.have.property("success");
             resGet.body.success.should.equal(true);
             resGet.body.should.have.property("jobs");
-            resGet.body.jobs.length.should.equal(4);
+            resGet.body.jobs.length.should.equal(1);
             resGet.body.jobs[0].description.should.contain("Test Employer");
             done();
           });
