@@ -4,7 +4,6 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: ["react-hot-loader/patch", "./src/index.js"],
-  mode: "development",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
@@ -34,13 +33,11 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|ttf)$/,
+        type: "asset/inline",
+      },
     ],
-  },
-  devServer: {
-    contentBase: path.join(__dirname, "public/"),
-    port: 3000,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true,
   },
   plugins: [new Dotenv(), new webpack.HotModuleReplacementPlugin()],
 };
