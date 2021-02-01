@@ -1,3 +1,4 @@
+import { hot } from "react-hot-loader/root";
 import React, { Fragment, useState, useEffect } from "react";
 import Header from "./Components/Common/Header";
 import Dashboard from "./Components/Main/Dashboard";
@@ -9,7 +10,7 @@ import AuthDashboard from "./Components/Main/AuthDashboard";
 
 const defaultUser = { user: null, token: null, isAuthenticated: false };
 
-export default function App() {
+function App() {
   const [auth, setAuth] = useState(defaultUser);
   const [data, setData] = useState({ jobs: [] });
 
@@ -79,3 +80,5 @@ export default function App() {
     </Fragment>
   );
 }
+
+export default hot(App);

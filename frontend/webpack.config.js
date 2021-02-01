@@ -3,7 +3,7 @@ const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: ["react-hot-loader/patch", "./src/index.js"],
   mode: "development",
   output: {
     path: path.resolve(__dirname, "dist"),
