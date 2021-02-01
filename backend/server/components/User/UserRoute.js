@@ -7,7 +7,7 @@ const router = require("express").Router(),
     verifyToken,
     getTokenFromHeader,
   } = require("../../utils/tokenHandler"),
-  { addDefaultUser } = require("./UserHelper");
+  { addDefaultUser, getUser } = require("./UserHelper");
 
 router.get(
   ["/user/", "/defaultUser"],
@@ -18,7 +18,9 @@ router.get(
       const { UserId } = req.body;
       const user = await UserRepo.getUserById(UserId);
       const token = getTokenFromHeader(req);
-      return res.status(200).json({ success: true, user: user, token: token });
+      return res
+        .status(200)
+        .json({ success: true, user: getUser(user), token: token });
     } catch (error) {
       handleError(res, 403, "Could not get user");
     }

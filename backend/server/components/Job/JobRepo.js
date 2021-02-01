@@ -10,9 +10,11 @@ async function getAllJobs(UserId) {
     const user = await Users.findByPk(UserId, {
       include: {
         model: Job,
+        attributes: ["title", "employer", "city", "state", "id"],
         include: {
           model: Location,
           as: "Location",
+          attributes: ["latitude", "longitude"],
         },
       },
     });
@@ -26,9 +28,18 @@ async function getAllJobs(UserId) {
 async function getJobById(jobId) {
   try {
     const job = await Job.findByPk(jobId, {
+      attributes: [
+        "title",
+        "employer",
+        "description",
+        "apply_date",
+        "city",
+        "state",
+      ],
       include: {
         model: Location,
         as: "Location",
+        attributes: ["latitude", "longitude"],
       },
     });
     return job ? job : null;

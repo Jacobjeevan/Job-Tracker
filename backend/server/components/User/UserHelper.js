@@ -20,6 +20,14 @@ const addDefaultUser = async (req, res, next) => {
   }
 };
 
+const getUser = (user) => {
+  return {
+    email: user.email,
+    id: user.id,
+  };
+};
+
 module.exports = {
   addDefaultUser,
+  getUser,
 };
