@@ -55,7 +55,6 @@ export default function Mapbox() {
     function createDivElement() {
       var element = document.createElement("div");
       element.className = "marker";
-      element.style.backgroundImage = "url(/static/job.png)";
       return element;
     }
 

@@ -29,69 +29,80 @@ export default function Form() {
     mutate("jobsData");
   }
 
+  const formGroupClass = () => {
+    return "flex-1 flex flex-col space-y-1";
+  };
+
+  const formElementClass = () => {
+    return "flex-1 text-md";
+  };
+
   return (
-    <div className="card">
-      <form onSubmit={onSubmit} className="m-4">
-        <div className="form-group">
-          <label>Job Title</label>
+    <div className="">
+      <form
+        onSubmit={onSubmit}
+        className="m-4 p-5 flex flex-col space-y-2 border-2 border-black"
+      >
+        <div className={formGroupClass()}>
+          <label className={formElementClass()}>Job Title</label>
           <input
             type="text"
-            className="form-control"
+            className={formElementClass()}
             onChange={onChange}
             name="title"
             value={formValues.title}
           />
         </div>
-        <div className="form-group">
-          <label>Employer</label>
+        <div className={formGroupClass()}>
+          <label className={formElementClass()}>Employer</label>
           <input
             type="text"
-            className="form-control"
+            className={formElementClass()}
             onChange={onChange}
             name="employer"
             value={formValues.employer}
           />
         </div>
-        <div className="form-group">
-          <label>Apply Date</label>
+        <div className={formGroupClass()}>
+          <label className={formElementClass()}>Apply Date</label>
           <input
             type="date"
-            className="form-control"
+            className={formElementClass()}
             onChange={onChange}
             name="apply_date"
             value={formValues.apply_date}
           />
         </div>
-        <div className="form-group">
-          <label>Description</label>
+        <div className={formGroupClass()}>
+          <label className={formElementClass()}>Description</label>
           <textarea
-            className="form-control"
+            className={formElementClass()}
             onChange={onChange}
             name="description"
             value={formValues.description}
           />
         </div>
-        <div className="form-group">
-          <label>City</label>
+        <div className={formGroupClass()}>
+          <label className={formElementClass()}>City</label>
           <input
             type="text"
-            className="form-control"
+            className={formElementClass()}
             onChange={onChange}
             name="city"
             value={formValues.city}
           />
         </div>
-        <div className="form-group">
-          <label>State</label>
+        <div className={formGroupClass()}>
+          <label className={formElementClass()}>State</label>
           <input
             type="text"
-            className="form-control"
+            className={formElementClass()}
             onChange={onChange}
             name="state"
             value={formValues.state}
           />
         </div>
-        <div className="form-group">
+        <div className={formGroupClass()}>
           <button type="submit" className="btn btn-primary">
             Submit
           </button>

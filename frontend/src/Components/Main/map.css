@@ -9,6 +9,7 @@
 .marker {
   width: 20px;
   height: 20px;
+  background-image: url("../../../assets/job.png");
 }
 
 @media only screen and (max-width: 768px) {

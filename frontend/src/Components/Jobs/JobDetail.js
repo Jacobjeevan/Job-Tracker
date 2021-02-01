@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getJobById } from "./jobsAPI";
-import "./Jobs.css";
 import { AppContext } from "../Common/AppContext";
 import { useParams } from "react-router-dom";
 
@@ -25,17 +24,16 @@ export default function JobDetail() {
   return (
     <div>
       {job ? (
-        <div className="container detail-container">
-          <div className="card-detail">
-            <h2>{job.title}</h2>
-            <br></br>
-            <p>{job.description}</p>
-            <br></br>
-            <p>{job.employer}</p>
-            <br></br>
-            <p>
-              {job.city}, {job.state}
-            </p>
+        <div className="container mx-10 border-2 p-5">
+          <div className="flex flex-col space-y-5">
+            <div className="flex-1 flex flex-row border-b border-black">
+              <h2 className="flex-grow text-xl w-6/12">{job.title}</h2>
+              <p className="flex-grow-0 pr-2">{job.employer}</p>
+              <p className="flex-grow-0">
+                {job.city}, {job.state}
+              </p>
+            </div>
+            <p className="flex-1">{job.description}</p>
           </div>
         </div>
       ) : (
