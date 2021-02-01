@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { loadDefaultUser, logout } from "../Auth/authAPI";
 import { AppContext } from "./AppContext";
-import "./Header.css";
 
 export default function Header() {
   const { isAuthenticated, clearUser, token, storeAuth } = useContext(
@@ -24,64 +23,60 @@ export default function Header() {
     }
   };
 
+  const getNavClasses = () => {
+    return "flex-1 hover:text-blue-600 py-1";
+  };
+
+  const djangoLink = (
+    <a className={getNavClasses()} href="http://jt-django.jeevan.link">
+      Django Version
+    </a>
+  );
+
   const authLinks = (
-    <ul className="navbar-nav mt-lg-0 auth-nav">
-      <Link to="/map" className="nav-link mr-4">
+    <div className="flex space-x-5">
+      {djangoLink}
+      <Link to="/map" className={getNavClasses()}>
         Map Page
       </Link>
-      <Link to="/new-job" className="nav-link mr-4">
+      <Link to="/new-job" className={getNavClasses()}>
         Add Job
       </Link>
-      <Link to="/jobs" className="nav-link mr-4">
+      <Link to="/jobs" className={getNavClasses()}>
         Jobs List
       </Link>
-      <Link to="/login" onClick={handleLogout} className="nav-link mr-4">
+      <Link to="/login" onClick={handleLogout} className={getNavClasses()}>
         Logout
       </Link>
-    </ul>
+    </div>
   );
 
   const guestLinks = (
-    <ul className="navbar-nav mt-lg-0 auth-nav">
-      <Link to="/register" className="nav-link mr-4">
+    <div className="flex space-x-5">
+      {djangoLink}
+      <Link to="/register" className={getNavClasses()}>
         Register
       </Link>
-      <Link to="/login" className="nav-link mr-4">
+      <Link to="/login" className={getNavClasses()}>
         Login
       </Link>
-      <button className="nav-link mr-4" onClick={async () => await loginTest()}>
+      <div className={getNavClasses()} onClick={async () => await loginTest()}>
         Login as Test User
-      </button>
-    </ul>
+      </div>
+    </div>
   );
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light ">
-      <div className="container">
-        <Link to="/" className="navbar-brand">
+    <nav className="bg-blue-200 ">
+      <div className=" flex flex-col">
+        <Link
+          to="/"
+          className="flex-1 px-20 py-20 self-center text-6xl hover:text-blue-600 italic font-bold font-playfair"
+        >
           Job Tracker
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
-            <a
-              className="nav-link"
-              href="http://jobtracker-django.herokuapp.com/"
-            >
-              Django Frontend Version
-            </a>
-            {isAuthenticated ? authLinks : guestLinks}
-          </div>
+        <div className="flex-1 bg-blue-300 p-2 text-center text-md tracking-wider">
+          {isAuthenticated ? authLinks : guestLinks}
         </div>
       </div>
     </nav>

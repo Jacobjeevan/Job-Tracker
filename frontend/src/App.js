@@ -63,7 +63,7 @@ function App() {
   }, [auth, token, user]);
 
   return (
-    <Fragment>
+    <div className="bg-blue-50">
       <AppContext.Provider
         value={{ isAuthenticated, token, clearUser, storeAuth }}
       >
@@ -77,7 +77,7 @@ function App() {
           <AuthDashboard />
         </AppContext.Provider>
       </div>
-    </Fragment>
+    </div>
   );
 }
 
