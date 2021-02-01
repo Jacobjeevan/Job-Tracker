@@ -1,11 +1,25 @@
 version: "3"
 services:
+  api:
+    build: .
+    command: npm run start
+    volumes:
+      - .:/api/
+      - /api/node_modules
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      - db_test
+
   db:
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5433:5432
+    env_file:
+      - .env
 
   db_test:
     image: postgres
@@ -13,11 +27,10 @@ services:
       - postgres_data_test:/var/lib/postgresql/data/
     ports:
       - 5434:5432
-    environment:
-      - POSTGRES_DB=jobtracker_db_test
-      - POSTGRES_USER=jobtracker_test
-      - POSTGRES_PASSWORD=te$tPA$$W0RD
+    env_file:
+      - .env.test
 
 volumes:
+  api:
   postgres_data:
   postgres_data_test:
