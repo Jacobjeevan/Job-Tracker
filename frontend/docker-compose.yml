@@ -1,13 +1,9 @@
 version: "3"
 services:
-  web:
+  nginx:
     build: .
-    command: npm run start
-    volumes:
-      - .:/web/
-      - /web/node_modules
     ports:
-      - 3000:3000
+      - 8080:80
     env_file:
       - .env
 

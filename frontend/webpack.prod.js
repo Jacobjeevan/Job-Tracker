@@ -5,8 +5,10 @@ const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
   mode: "production",
-  plugins: [...common.plugins, new HtmlWebpackPlugin()],
-  optimization: {
-    splitChunks: { chunks: "all" },
-  },
+  plugins: [
+    ...common.plugins,
+    new HtmlWebpackPlugin({
+      template: path.resolve("./public/template-index.html"),
+    }),
+  ],
 });

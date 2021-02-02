@@ -11,12 +11,19 @@ COPY . .
 RUN npm run build
 
 
-FROM node:15.7.0-alpine3.12
+FROM alpine
 
 WORKDIR /frontend
 
-COPY package*.json ./
+# Adding bash, in run within container
+RUN apk add --no-cache bash
 
-RUN npm install
+COPY --from=buildstage /frontend/dist .
 
-COPY --from=buildstage /frontend/dist ./public
+RUN touch .static
+
+# Uncomment below to run locally with nginx
+
+#FROM nginx
+
+#COPY --from=buildstage /frontend/dist /usr/share/nginx/html
