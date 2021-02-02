@@ -1,4 +1,4 @@
-# Job Tracker (React Frontend/Django Backend)
+# Job Tracker (React/Node.js)
 
 #### Objectives
 
@@ -32,9 +32,9 @@ Refer to [Plan](docs/plan.md) for detailed implementation plan of the project. Y
   - Functional components, removing Redux and using React context
 - [x] Rewrite backend in Node.js
   - [x] Add backend tests
-  - [ ] Modify frontend to integrate with new backend (In Progress)
+  - [x] Modify frontend to integrate with new backend
 - [ ] Deploy containers on Digital Ocean Droplet using Dokku
-- [ ] Frontend redesign
+- [ ] Frontend redesign (In progress)
   - [ ] Redesign frontend to use Tailwind CSS framework
   - [ ] Add a frontend landing page
 - [ ] New Features
