@@ -27,3 +27,9 @@ RUN touch .static
 #FROM nginx
 
 #COPY --from=buildstage /frontend/dist /usr/share/nginx/html
+
+#RUN rm /etc/nginx/conf.d/default.conf
+
+#COPY nginx.conf /etc/nginx/nginx.conf
+
+#CMD ["nginx", "-g", "daemon off;"]
