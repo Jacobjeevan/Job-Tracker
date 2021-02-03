@@ -6,12 +6,12 @@ const express = require("express"),
   logger = require("./utils/logger"),
   morgan = require("morgan");
 
-dotenv.config({ path: "./.env" });
-
 if (process.env.NODE_ENV === "PRODUCTION") {
   dotenv.config({ path: "./.env.prod" });
 } else if (process.env.NODE_ENV === "TEST") {
   dotenv.config({ path: "./.env.test" });
+} else {
+  dotenv.config({ path: "./.env" });
 }
 
 const app = express();

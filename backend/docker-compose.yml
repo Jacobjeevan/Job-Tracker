@@ -28,9 +28,7 @@ services:
     environment:
       - POSTGRES_DB=db_test
       - POSTGRES_USER=jobtracker
-      - POSTGRES_PASSWORD=te$tPA$$W0RD
-      - POSTGRES_HOST=localhost
-      - POSTGRES_PORT=5434
+      - POSTGRES_PASSWORD=testPassword
 
 volumes:
   api:
