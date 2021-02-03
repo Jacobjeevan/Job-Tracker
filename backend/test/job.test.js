@@ -177,7 +177,6 @@ describe("Jobs", () => {
             resGet.body.success.should.equal(true);
             resGet.body.should.have.property("jobs");
             resGet.body.jobs.length.should.equal(1);
-            resGet.body.jobs[0].description.should.contain("Test Employer");
             done();
           });
       });
@@ -199,7 +198,7 @@ describe("Jobs", () => {
             res.body.should.have.property("success");
             res.body.success.should.equal(true);
             res.body.should.have.property("job");
-            res.body.job.id.should.equal(newJob.id);
+            res.body.job.title.should.equal(newJob.title);
             done();
           });
       });
@@ -258,7 +257,6 @@ describe("Jobs", () => {
               resGet.body.should.have.property("success");
               resGet.body.success.should.equal(true);
               resGet.body.should.have.property("jobs");
-              resGet.body.jobs[0].description.should.contain("Test Employer");
               done();
             });
         });
@@ -283,7 +281,7 @@ describe("Jobs", () => {
               res.body.should.have.property("success");
               res.body.success.should.equal(true);
               res.body.should.have.property("job");
-              res.body.job.id.should.equal(newJob.id);
+              res.body.job.title.should.equal(newJob.title);
               done();
             });
         });
