@@ -1,0 +1,31 @@
+name: frontend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+
+  pull_request:
+    branches: [main]
+    paths:
+      - "frontend/**"
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Push frontend to dokku
+        uses: dokku/github-action@v1.0.1
+        with:
+          branch: main
+          git_remote_url: "ssh://dokku@ente-dokku.jeevan.link/jobtracker-react"
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          git_push_flags: --force
