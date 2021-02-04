@@ -38,7 +38,7 @@ jobs:
           echo "BRANCH=main" >> .env
           echo "GIT_REMOTE_URL=$GIT_REMOTE_URL" >> .env
           echo "GIT_PUSH_FLAGS=--force" >> .env
-          SSH_PRIVATE_KEY="$(cat ~/.ssh/id_ed25519)"
+          SSH_PRIVATE_KEY="$(cat "$(ls ~/.ssh | grep id_rsa_)")"
           echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY" >> .env
       - setup_remote_docker:
           version: 19.03.13
