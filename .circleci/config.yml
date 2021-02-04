@@ -1,0 +1,42 @@
+version: 2.1
+
+workflows:
+  jobtracker:
+    jobs:
+      - test-Deploy:
+          context: Dockerhub
+
+jobs:
+  test-Deploy:
+    docker:
+      - image: cimg/node:15.8.0
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          MAP_API_KEY: $MAP_API_KEY
+          MAP_URL: $MAP_URL
+          TOKEN_SECRET: $TOKEN_SECRET
+          DATABASE_URL: postgres://jobtracker:testPassword@localhost:5432/db_test
+          GIT_REMOTE_URL: ssh://dokku@ente-dokku.jeevan.link/jtr-backend
+          SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+      - image: circleci/postgres:latest
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+        environment:
+          POSTGRES_DB: db_test
+          POSTGRES_USER: jobtracker
+          POSTGRES_PASSWORD: testPassword
+    steps:
+      - checkout
+      - run: cd backend && npm ci
+      - run: cd backend && npm run test
+      - run: |
+          echo "BRANCH=main" >> .env
+          echo "GIT_REMOTE_URL=$GIT_REMOTE_URL" >> .env
+          echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY" >> .env
+          echo "GIT_PUSH_FLAGS=--force" >> .env
+      - run:
+          name: Deploy to Dokku
+          command: docker run --rm -v="$PWD:/app" --env-file=.env dokku/ci-docker-image dokku-deploy
