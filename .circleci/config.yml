@@ -19,7 +19,6 @@ jobs:
           TOKEN_SECRET: $TOKEN_SECRET
           DATABASE_URL: postgres://jobtracker:testPassword@localhost:5432/db_test
           GIT_REMOTE_URL: ssh://dokku@ente-dokku.jeevan.link/jtr-backend
-          SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
       - image: circleci/postgres:latest
         auth:
           username: $DOCKERHUB_USER
@@ -32,11 +31,15 @@ jobs:
       - checkout
       - run: cd backend && npm ci
       - run: cd backend && npm run test
+      - add_ssh_keys:
+          fingerprints:
+            - "03:84:98:c0:72:4e:e3:fc:d3:28:7b:be:12:61:10:10"
       - run: |
           echo "BRANCH=main" >> .env
           echo "GIT_REMOTE_URL=$GIT_REMOTE_URL" >> .env
-          echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY" >> .env
           echo "GIT_PUSH_FLAGS=--force" >> .env
+          SSH_PRIVATE_KEY="$(cat ~/.ssh/id_ed25519)"
+          echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY" >> .env
       - setup_remote_docker:
           version: 19.03.13
       - run:
