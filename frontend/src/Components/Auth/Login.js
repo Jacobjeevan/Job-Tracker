@@ -10,7 +10,7 @@ const defaultAuth = {
 
 export default function Login() {
   const [auth, setAuth] = useState(defaultAuth);
-  const { isAuthenticated, storeAuth } = useContext(AppContext);
+  const { token, storeAuth } = useContext(AppContext);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -30,7 +30,7 @@ export default function Login() {
     });
   }
 
-  if (isAuthenticated) {
+  if (token) {
     return <Redirect to="/" />;
   }
 

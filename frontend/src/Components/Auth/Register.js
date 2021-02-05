@@ -11,7 +11,7 @@ const defaultAuth = {
 
 export default function Register() {
   const [auth, setAuth] = useState(defaultAuth);
-  const { isAuthenticated, storeAuth } = useContext(AppContext);
+  const { token, storeAuth } = useContext(AppContext);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -28,7 +28,7 @@ export default function Register() {
     setAuth({ ...auth, [e.target.name]: e.target.value });
   }
 
-  if (isAuthenticated) {
+  if (token) {
     return <Redirect to="/" />;
   }
 

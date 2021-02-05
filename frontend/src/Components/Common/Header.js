@@ -4,9 +4,7 @@ import { loadDefaultUser, logout } from "../Auth/authAPI";
 import { AppContext } from "./AppContext";
 
 export default function Header() {
-  const { isAuthenticated, clearUser, token, storeAuth } = useContext(
-    AppContext
-  );
+  const { clearUser, token, storeAuth } = useContext(AppContext);
 
   const handleLogout = async () => {
     await logout(token);
@@ -76,7 +74,7 @@ export default function Header() {
           Job Tracker
         </Link>
         <div className="flex-1 bg-blue-300 p-2 text-center text-md tracking-wider">
-          {isAuthenticated ? authLinks : guestLinks}
+          {token ? authLinks : guestLinks}
         </div>
       </div>
     </nav>

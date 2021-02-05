@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useContext, useRef } from "react";
 import "./map.css";
 import { AppContext } from "../Common/AppContext";
 import mapboxgl from "mapbox-gl";
+import useJobs from "../Jobs/useJobs";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
@@ -12,8 +13,8 @@ const defaultMapValues = {
 };
 
 export default function Mapbox() {
-  const { data } = useContext(AppContext);
-  let { jobs } = data;
+  const { token } = useContext(AppContext);
+  const jobs = useJobs(token);
   const mapContainer = useRef(null);
 
   useEffect(() => {
@@ -25,7 +26,9 @@ export default function Mapbox() {
     });
 
     map.on("load", () => {
-      addMarker();
+      if (jobs) {
+        addMarker();
+      }
     });
 
     function addMarker() {
