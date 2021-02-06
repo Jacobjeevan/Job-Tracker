@@ -8,7 +8,7 @@ import {
   formInputClass,
   formClass,
   submitBtnClass,
-} from "./formCSS";
+} from "../Common/formCSS";
 import { useForm } from "react-hook-form";
 import { loginResolver } from "./authHelper";
 

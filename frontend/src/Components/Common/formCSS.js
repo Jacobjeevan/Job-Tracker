@@ -11,7 +11,7 @@ export const formInputClass = () => {
 };
 
 export const formClass = () => {
-  return "my-4 mx-80 p-10 flex flex-col space-y-4 border border-blue-200 shadow-sm font-playfair italic rounded";
+  return "my-4 mx-40 p-10 flex flex-col space-y-4 border border-blue-200 shadow-sm font-playfair italic rounded";
 };
 
 export const submitBtnClass = () => {
