@@ -1,110 +1,99 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { addJob } from "./jobsAPI";
 import { mutate } from "swr";
 import { AppContext } from "../Common/AppContext";
-
-const defaultValues = {
-  title: "",
-  employer: "",
-  apply_date: "",
-  description: "",
-  city: "",
-  state: "",
-};
+import { useForm } from "react-hook-form";
+import { addFormResolver } from "./jobHelper";
+import {
+  formGroupClass,
+  formElementClass,
+  formInputClass,
+  formClass,
+} from "../Common/formCSS";
 
 export default function Form() {
-  const [formValues, setFormValues] = useState(defaultValues);
   const { token } = useContext(AppContext);
 
-  function onChange(e) {
-    setFormValues({
-      ...formValues,
-      [e.target.name]: e.target.value,
-    });
-  }
+  const { register, handleSubmit, errors } = useForm({
+    resolver: addFormResolver,
+  });
 
-  async function onSubmit(e) {
-    e.preventDefault();
+  const onSubmit = async (formValues) => {
     await addJob(formValues, token);
     mutate("jobsData");
-  }
-
-  const formGroupClass = () => {
-    return "flex-1 flex flex-col space-y-2";
-  };
-
-  const formElementClass = () => {
-    return "flex-1 text-md";
-  };
-
-  const formInputClass = () => {
-    return "flex-1 text-md rounded shadow p-2 focus:outline-none focus:ring focus:ring-blue-400 focus:shadow-md";
   };
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="my-4 mx-40 p-10 flex flex-col space-y-4 border-2 border-blue-200 shadow-sm font-playfair italic rounded"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className={formClass()}>
       <div className={formGroupClass()}>
         <label className={formElementClass()}>Job Title</label>
         <input
           type="text"
           className={formInputClass()}
-          onChange={onChange}
           name="title"
-          value={formValues.title}
+          ref={register}
         />
+        <p className="p-2 text-sm text-gray-400">{errors.title?.message}</p>
       </div>
+
       <div className={formGroupClass()}>
         <label className={formElementClass()}>Employer</label>
         <input
           type="text"
           className={formInputClass()}
-          onChange={onChange}
+          ref={register}
           name="employer"
-          value={formValues.employer}
         />
+        <p className="p-2 text-sm text-gray-400">{errors.employer?.message}</p>
       </div>
+
       <div className={formGroupClass()}>
         <label className={formElementClass()}>Apply Date</label>
         <input
           type="date"
           className={formInputClass()}
-          onChange={onChange}
+          ref={register}
           name="apply_date"
-          value={formValues.apply_date}
         />
+        <p className="p-2 text-sm text-gray-400">
+          {errors.apply_date?.message}
+        </p>
       </div>
+
       <div className={formGroupClass()}>
         <label className={formElementClass()}>Description</label>
         <textarea
           className={formInputClass()}
-          onChange={onChange}
+          ref={register}
           name="description"
-          value={formValues.description}
         />
+        <p className="p-2 text-sm text-gray-400">
+          {errors.description?.message}
+        </p>
       </div>
+
       <div className={formGroupClass()}>
         <label className={formElementClass()}>City</label>
         <input
           type="text"
           className={formInputClass()}
-          onChange={onChange}
+          ref={register}
           name="city"
-          value={formValues.city}
         />
+        <p className="p-2 text-sm text-gray-400">{errors.city?.message}</p>
       </div>
+
       <div className={formGroupClass()}>
         <label className={formElementClass()}>State</label>
         <input
           type="text"
           className={formInputClass()}
-          onChange={onChange}
+          ref={register}
           name="state"
-          value={formValues.state}
         />
+        <p className="p-2 text-sm text-gray-400">{errors.state?.message}</p>
       </div>
+
       <div className={formGroupClass()}>
         <button
           type="submit"
