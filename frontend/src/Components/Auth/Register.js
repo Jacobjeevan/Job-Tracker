@@ -2,6 +2,13 @@ import React, { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { register } from "./authAPI";
 import { AppContext } from "../Common/AppContext";
+import {
+  formGroupClass,
+  formElementClass,
+  formInputClass,
+  formClass,
+  submitBtnClass,
+} from "./formCSS";
 
 const defaultAuth = {
   email: "",
@@ -33,50 +40,45 @@ export default function Register() {
   }
 
   return (
-    <div className="col-md-6 m-auto">
-      <div className="card card-body mt-5">
-        <h2 className="text-center">Register</h2>
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              className="form-control"
-              name="email"
-              onChange={onChange}
-              value={auth.email}
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              onChange={onChange}
-              value={auth.password}
-            />
-          </div>
-          <div className="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="password2"
-              onChange={onChange}
-              value={auth.password2}
-            />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Register
-            </button>
-          </div>
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
-        </form>
+    <form onSubmit={onSubmit} className={formClass()}>
+      <div className={formGroupClass()}>
+        <label className={formElementClass()}>Email</label>
+        <input
+          type="email"
+          className={formInputClass()}
+          name="email"
+          onChange={onChange}
+          value={auth.email}
+        />
       </div>
-    </div>
+      <div className={formGroupClass()}>
+        <label className={formElementClass()}>Password</label>
+        <input
+          type="password"
+          className={formInputClass()}
+          name="password"
+          onChange={onChange}
+          value={auth.password}
+        />
+      </div>
+      <div className={formGroupClass()}>
+        <label className={formElementClass()}>Confirm Password</label>
+        <input
+          type="password"
+          className={formInputClass()}
+          name="password2"
+          onChange={onChange}
+          value={auth.password2}
+        />
+      </div>
+      <div className={formGroupClass()}>
+        <button type="submit" className={submitBtnClass()}>
+          Register
+        </button>
+      </div>
+      <p>
+        Already have an account? <Link to="/login">Login</Link>
+      </p>
+    </form>
   );
 }
