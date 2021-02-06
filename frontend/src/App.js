@@ -8,7 +8,7 @@ import useUser from "./Components/Auth/useUser";
 
 function App() {
   const [token, setToken] = useToken();
-  const [user, setUser] = useUser(token);
+  const [user, setUser] = useUser();
 
   function storeAuth(authData) {
     let { user, token } = authData;
@@ -22,11 +22,9 @@ function App() {
   }
 
   return (
-    <div className="bg-blue-50 h-screen">
-      <AppContext.Provider value={{ token, clearUser, storeAuth, user }}>
-        <Dashboard />
-      </AppContext.Provider>
-    </div>
+    <AppContext.Provider value={{ token, clearUser, storeAuth, user }}>
+      <Dashboard />
+    </AppContext.Provider>
   );
 }
 

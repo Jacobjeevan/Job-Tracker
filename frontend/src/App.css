@@ -30,7 +30,20 @@
 
 @font-face {
   font-family: "Playfair";
+  font-weight: 400;
+  font-style: italic;
+  src: url("../assets/fonts/PlayfairDisplay-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Playfair";
   font-weight: 700;
   font-style: italic;
   src: url("../assets/fonts/PlayfairDisplay-BoldItalic.ttf") format("truetype");
+}
+
+html,
+body,
+#app {
+  height: 100vh;
 }
