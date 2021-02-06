@@ -1,5 +1,6 @@
 import React from "react";
+import Header from "../Common/Header";
 
 export default function FrontPage() {
-  return <div>This will be the front page</div>;
+  return <Header />;
 }

@@ -65,8 +65,8 @@ export default function Mapbox() {
   }, [jobs]);
 
   return (
-    <Fragment>
+    <div className="w-2/5 h-3/5">
       <div ref={mapContainer} className="mapContainer" />
-    </Fragment>
+    </div>
   );
 }
