@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { addJob } from "../Jobs/jobsAPI";
+import { addJob } from "./jobsAPI";
 import { mutate } from "swr";
 import { AppContext } from "../Common/AppContext";
 
@@ -38,7 +38,7 @@ export default function Form() {
   };
 
   const formInputClass = () => {
-    return "flex-1 text-md rounded shadow p-2";
+    return "flex-1 text-md rounded shadow p-2 focus:outline-none focus:ring focus:ring-blue-400 focus:shadow-md";
   };
 
   return (

@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import MapBox from "./Mapbox";
 import Jobs from "../Jobs/Jobs";
 import JobDetail from "../Jobs/JobDetail";
-import Form from "../Main/Form";
+import Form from "../Jobs/Form";
 import PrivateRoute from "../Common/PrivateRoute";
 import Layout from "./Layout";
 
