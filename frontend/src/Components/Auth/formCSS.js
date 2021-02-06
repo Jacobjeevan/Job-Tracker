@@ -7,7 +7,7 @@ export const formElementClass = () => {
 };
 
 export const formInputClass = () => {
-  return "flex-1 text-md rounded shadow p-2";
+  return "flex-1 text-md rounded shadow p-2 focus:outline-none focus:ring focus:ring-blue-400 focus:shadow-md";
 };
 
 export const formClass = () => {

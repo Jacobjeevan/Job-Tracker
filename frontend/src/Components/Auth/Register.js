@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { register } from "./authAPI";
+import { register as registerUser } from "./authAPI";
 import { AppContext } from "../Common/AppContext";
 import {
   formGroupClass,
@@ -9,47 +9,40 @@ import {
   formClass,
   submitBtnClass,
 } from "./formCSS";
-
-const defaultAuth = {
-  email: "",
-  password: "",
-  password2: "",
-};
+import { useForm } from "react-hook-form";
+import { registerResolver } from "./authHelper";
 
 export default function Register() {
-  const [auth, setAuth] = useState(defaultAuth);
   const { token, storeAuth } = useContext(AppContext);
+  const { register, handleSubmit, errors } = useForm({
+    resolver: registerResolver,
+  });
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    let APIresponse = await register(auth);
+  const onSubmit = async (auth) => {
+    let APIresponse = await registerUser(auth);
     const { success, token, error } = APIresponse;
     if (success) {
       storeAuth({ user: null, token });
     } else if (error) {
       console.log("Error registering user");
     }
-  }
-
-  function onChange(e) {
-    setAuth({ ...auth, [e.target.name]: e.target.value });
-  }
+  };
 
   if (token) {
     return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onSubmit} className={formClass()}>
+    <form onSubmit={handleSubmit(onSubmit)} className={formClass()}>
       <div className={formGroupClass()}>
         <label className={formElementClass()}>Email</label>
         <input
-          type="email"
           className={formInputClass()}
           name="email"
-          onChange={onChange}
-          value={auth.email}
+          ref={register}
+          placeholder="Email/Username"
         />
+        <p className="text-sm text-gray-400">{errors.email?.message}</p>
       </div>
       <div className={formGroupClass()}>
         <label className={formElementClass()}>Password</label>
@@ -57,28 +50,33 @@ export default function Register() {
           type="password"
           className={formInputClass()}
           name="password"
-          onChange={onChange}
-          value={auth.password}
+          ref={register}
         />
+        <p className="text-sm text-gray-400">{errors.password?.message}</p>
       </div>
       <div className={formGroupClass()}>
         <label className={formElementClass()}>Confirm Password</label>
         <input
           type="password"
           className={formInputClass()}
-          name="password2"
-          onChange={onChange}
-          value={auth.password2}
+          name="passwordConfirm"
+          ref={register}
         />
+        <p className="text-sm text-gray-400">
+          {errors.passwordConfirm?.message}
+        </p>
       </div>
       <div className={formGroupClass()}>
         <button type="submit" className={submitBtnClass()}>
           Register
         </button>
       </div>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+      <div>
+        Already have an account?{" "}
+        <Link to="/login">
+          <div className="underline">Login</div>
+        </Link>
+      </div>
     </form>
   );
 }
