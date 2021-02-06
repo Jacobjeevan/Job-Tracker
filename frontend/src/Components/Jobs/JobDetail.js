@@ -24,16 +24,20 @@ export default function JobDetail() {
   return (
     <div>
       {job ? (
-        <div className="container mx-10 border-2 p-5">
-          <div className="flex flex-col space-y-5">
-            <div className="flex-1 flex flex-row border-b border-black">
-              <h2 className="flex-grow text-xl w-6/12">{job.title}</h2>
-              <p className="flex-grow-0 pr-2">{job.employer}</p>
-              <p className="flex-grow-0">
+        <div className="mx-10 flex flex-col items-center">
+          <div className="flex flex-col space-y-5 p-5">
+            <div className="flex-1 flex flex-row">
+              <h2 className="flex-grow text-3xl text-center font-playfair">
+                {job.title}
+              </h2>
+            </div>
+            <p className="flex-1 shadow bg-blue-100 p-5">{job.description}</p>
+            <div className="flex-1 flex flex-row border-t border-b p-2 border-black justify-between">
+              <p className="flex-1 text-left">{job.employer}</p>
+              <p className="flex-1 text-right">
                 {job.city}, {job.state}
               </p>
             </div>
-            <p className="flex-1">{job.description}</p>
           </div>
         </div>
       ) : (

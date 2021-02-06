@@ -14,38 +14,38 @@ export default function Jobs() {
 
   return (
     <Fragment>
-      <div className="container flex flex-wrap">
+      <div className="container flex flex-wrap justify-start">
         {jobs &&
           jobs.map((job) => (
             <div
               key={job.id}
-              className="m-5 border-2 rounded-md flex flex-col"
+              className="m-5 rounded-md flex flex-col space-y-2"
               style={{ width: "18rem" }}
             >
-              <div className="flex flex-row text-center tracking-widest">
-                <div className="flex-1 bg-blue-300 p-2">
+              <div className="flex shadow-sm flex-row text-center tracking-widest bg-white text-sm font-playfair font-bold">
+                <div className="flex-1 p-2">
                   <p>{job.employer}</p>
                 </div>
-                <div className="flex-1 bg-blue-300 p-2 border-l-2 border-white">
+                <div className="flex-1 p-2 border-l-2 border-white">
                   <p>
                     {job.city}, {job.state}
                   </p>
                 </div>
               </div>
-              <div className="flex-grow text-center pt-5 pb-5 bg-white">
+              <div className="flex-grow text-center py-10 border border-blue-300 font-playfair italic">
                 <h5 className="text-xl p-2">{job.title}</h5>
               </div>
 
               {token ? (
-                <div className="flex flex-row text-center">
+                <div className="flex flex-row text-center shadow-sm bg-white font-playfair text-xs font-bold">
                   <LinkButton
                     to={`/job/${job.id}`}
-                    className="flex-1 bg-green-200 p-2 hover:bg-green-400"
+                    className="flex-1 p-2 hover:bg-green-200"
                   >
                     View Details
                   </LinkButton>
                   <button
-                    className="flex-1 bg-red-200 p-2 hover:bg-red-400"
+                    className="flex-1 p-2 hover:bg-red-200"
                     onClick={deleteThisJob.bind(this, job.id)}
                   >
                     Delete

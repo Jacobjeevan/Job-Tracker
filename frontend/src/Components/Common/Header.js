@@ -25,6 +25,10 @@ export default function Header() {
     return "flex-1 hover:text-blue-600 py-1";
   };
 
+  const getLinkContainerClass = () => {
+    return "flex-1 flex space-x-5 text-center self-center space-x-24 items-stretch font-playfair italic tracking-widest";
+  };
+
   const djangoLink = (
     <a className={getNavClasses()} href="http://jt-django.jeevan.link">
       Django Version
@@ -32,7 +36,7 @@ export default function Header() {
   );
 
   const authLinks = (
-    <div className="flex space-x-5">
+    <div className={getLinkContainerClass()}>
       {djangoLink}
       <Link to="/map" className={getNavClasses()}>
         Map Page
@@ -50,7 +54,7 @@ export default function Header() {
   );
 
   const guestLinks = (
-    <div className="flex space-x-5">
+    <div className={getLinkContainerClass()}>
       {djangoLink}
       <Link to="/register" className={getNavClasses()}>
         Register
@@ -65,18 +69,17 @@ export default function Header() {
   );
 
   return (
-    <nav className="bg-blue-200 ">
-      <div className=" flex flex-col">
-        <Link
-          to="/"
-          className="flex-1 px-20 py-20 self-center text-6xl hover:text-blue-600 italic font-bold font-playfair"
-        >
-          Job Tracker
-        </Link>
-        <div className="flex-1 bg-blue-300 p-2 text-center text-md tracking-wider">
-          {token ? authLinks : guestLinks}
-        </div>
+    <div className="flex-initial flex flex-col space-y-10">
+      <Link
+        to="/"
+        className="flex-1 px-20 pt-20 pb-10 text-center text-6xl hover:text-blue-600 italic font-bold font-playfair"
+      >
+        Job Tracker
+      </Link>
+      <div className="flex-1 text-center font-playfair text-2xl italic tracking-wide">
+        Keep track of your job apps, the easy way.
       </div>
-    </nav>
+      {token ? authLinks : guestLinks}
+    </div>
   );
 }
