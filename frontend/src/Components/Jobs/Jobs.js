@@ -22,11 +22,11 @@ export default function Jobs() {
               className="m-5 rounded-md flex flex-col space-y-2"
               style={{ width: "18rem" }}
             >
-              <div className="flex shadow-sm flex-row text-center tracking-widest bg-white text-sm font-playfair font-bold">
-                <div className="flex-1 p-2">
+              <div className="flex shadow-sm flex-row text-center tracking-widest text-sm font-playfair font-bold space-x-1">
+                <div className="flex-1 p-2 bg-blue-100">
                   <p>{job.employer}</p>
                 </div>
-                <div className="flex-1 p-2 border-l-2 border-white">
+                <div className="flex-1 p-2 bg-blue-100">
                   <p>
                     {job.city}, {job.state}
                   </p>
@@ -37,15 +37,15 @@ export default function Jobs() {
               </div>
 
               {token ? (
-                <div className="flex flex-row text-center shadow-sm bg-white font-playfair text-xs font-bold">
+                <div className="flex flex-row text-center shadow-sm font-playfair text-xs font-bold space-x-1">
                   <LinkButton
                     to={`/job/${job.id}`}
-                    className="flex-1 p-2 hover:bg-green-200"
+                    className="flex-1 p-2 bg-blue-100 hover:bg-green-200"
                   >
                     View Details
                   </LinkButton>
                   <button
-                    className="flex-1 p-2 hover:bg-red-200"
+                    className="flex-1 p-2 bg-blue-100 hover:bg-red-200"
                     onClick={deleteThisJob.bind(this, job.id)}
                   >
                     Delete
