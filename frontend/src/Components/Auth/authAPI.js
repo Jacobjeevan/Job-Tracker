@@ -8,57 +8,57 @@ const config = {
 
 export async function loadUser(token) {
   if (token !== null) {
+    let response;
     try {
-      let response = await axiosInstance.get("/auth/user", tokenConfig(token));
-      return response.data;
+      response = await axiosInstance.get("/auth/user", tokenConfig(token));
     } catch (error) {
-      console.log(error);
-      return null;
+      response = error.response;
     }
+    return response.data;
   }
 }
 export async function loadDefaultUser() {
+  let response;
   try {
-    let response = await axiosInstance.get("/auth/defaultUser");
-    return response.data;
+    response = await axiosInstance.get("/auth/defaultUser");
   } catch (error) {
-    console.log(error);
-    return null;
+    response = error.response;
   }
+  return response.data;
 }
 
 export async function login(body) {
+  let response;
   try {
-    let response = await axiosInstance.post("/auth/login", body, config);
-    return response.data;
+    response = await axiosInstance.post("/auth/login", body, config);
   } catch (error) {
-    console.log(error);
-    return null;
+    response = error.response;
   }
+  return response.data;
 }
 
 export async function register(body) {
+  let response;
   try {
-    let response = await axiosInstance.post("/auth/register", body, config);
-    return response.data;
+    response = await axiosInstance.post("/auth/register", body, config);
   } catch (error) {
-    console.log(error);
-    return null;
+    response = error.response;
   }
+  return response.data;
 }
 
 export async function logout(token) {
+  let response;
   try {
-    let response = await axiosInstance.get(
+    response = await axiosInstance.get(
       "/auth/logout/",
       null,
       tokenConfig(token)
     );
-    return response.data;
   } catch (error) {
-    console.log(error);
-    return null;
+    response = error.response;
   }
+  return response.data;
 }
 
 export const tokenConfig = (token) => {

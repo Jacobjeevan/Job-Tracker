@@ -3,24 +3,23 @@ import useSWR from "swr";
 import { axiosInstance } from "../../axios";
 
 export async function getJobById(id, token) {
+  let response;
   try {
-    let response = await axiosInstance.get(
-      `/api/jobs/${id}/`,
-      tokenConfig(token)
-    );
-    return response.data;
+    response = await axiosInstance.get(`/api/jobs/${id}/`, tokenConfig(token));
   } catch (error) {
-    console.log(error);
+    response = error.response;
   }
+  return response.data;
 }
 
 export async function getJobs(token) {
+  let response;
   try {
-    let response = await axiosInstance.get("/api/jobs/", tokenConfig(token));
-    return response.data;
+    response = await axiosInstance.get("/api/jobs/", tokenConfig(token));
   } catch (error) {
-    console.log(error);
+    response = error.response;
   }
+  return response.data;
 }
 
 export function useGetJobs(token) {
@@ -40,26 +39,24 @@ export function useGetJobs(token) {
 }
 
 export async function deleteJob(id, token) {
+  let response;
   try {
-    let response = await axiosInstance.delete(
+    response = await axiosInstance.delete(
       `/api/jobs/${id}/`,
       tokenConfig(token)
     );
-    return response.data;
   } catch (error) {
-    console.log(error);
+    response = error.response;
   }
+  return response.data;
 }
 
 export async function addJob(job, token) {
+  let response;
   try {
-    let response = await axiosInstance.post(
-      "/api/jobs/",
-      job,
-      tokenConfig(token)
-    );
-    return response.data;
+    response = await axiosInstance.post("/api/jobs/", job, tokenConfig(token));
   } catch (error) {
-    console.log(error);
+    response = error.response;
   }
+  return response.data;
 }

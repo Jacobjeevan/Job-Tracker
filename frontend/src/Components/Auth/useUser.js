@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { loadUser } from "./authAPI";
+import useToken from "./useToken";
 
-export default function useUser(token) {
+export default function useUser() {
+  const [token, setToken] = useToken();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -11,13 +13,15 @@ export default function useUser(token) {
         const { success, user, error } = APIresponse;
         if (success) {
           setUser(user);
+        } else if (error.includes("Token could not be validated")) {
+          setToken(null);
         } else if (error) {
           console.log("Error loading user");
         }
       }
     }
     getUserFromSession();
-  }, [token, user]);
+  }, [token, user, setToken]);
 
   return [user, setUser];
 }

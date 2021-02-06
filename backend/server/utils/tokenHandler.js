@@ -36,7 +36,11 @@ const verifyToken = (req, res, next) => {
     nJwt.verify(token, signingKey, function (err, verifiedJwt) {
       if (err) {
         logger.error(err); // Token has expired, has been tampered with, etc
-        handleError(res, 404, "Token could be validated. Please login again.");
+        handleError(
+          res,
+          404,
+          "Token could not be validated. Please login again."
+        );
       } else {
         const { scope, sub } = verifiedJwt.body;
         req.body.scope = scope;
