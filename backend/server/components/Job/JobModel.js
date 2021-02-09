@@ -41,8 +41,8 @@ Job.init(
 
 Job.belongsTo(Location, {
   as: "Location",
+  foreignKey: "LocationId",
 });
-Users.hasMany(Job);
 Job.belongsTo(Users, {
   foreignKey: "UserId",
   as: "Author",

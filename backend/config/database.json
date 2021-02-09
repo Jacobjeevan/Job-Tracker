@@ -1,0 +1,26 @@
+{
+  "DEV": {
+    "username": "jeevan",
+    "password": "localPassword",
+    "database": "jobtracker_db",
+    "host": "127.0.0.1",
+    "port": 5433,
+    "dialect": "postgres"
+  },
+  "TEST": {
+    "username": "jeevan",
+    "password": "testPassword",
+    "database": "jobtracker_db_test",
+    "host": "127.0.0.1",
+    "port": 5434,
+    "dialect": "postgres"
+  },
+  "PRODUCTION": {
+    "username": "",
+    "password": "",
+    "database": "",
+    "host": "",
+    "port": "",
+    "dialect": "postgres"
+  }
+}
