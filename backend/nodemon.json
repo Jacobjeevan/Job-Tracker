@@ -3,6 +3,6 @@
   "ext": "js",
   "exec": "node server/app.js",
   "env": {
-    "NODE_ENV": "dev"
+    "NODE_ENV": "DEV"
   }
 }

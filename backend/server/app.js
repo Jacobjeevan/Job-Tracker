@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "PRODUCTION") {
 }
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5002;
 
 app.use(helmet());
 
@@ -25,7 +25,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-if (process.env.NODE_ENV === "dev") {
+if (process.env.NODE_ENV === "DEV") {
   app.use(morgan("dev"));
 }
 app.use(log4js.connectLogger(logger, { level: "info" }));
