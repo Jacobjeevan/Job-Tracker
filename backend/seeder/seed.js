@@ -42,15 +42,14 @@ const seedData = async (exit) => {
       password: hashedPass,
     });
 
-    await Promise.all(
-      sampleJobs.map(async (job) => {
-        await JobRepo.createJob({ ...job, UserId: newUser.id });
-      })
-    );
+    for (let i = 0; i < sampleJobs.length; i++) {
+      await JobRepo.createJob({ ...sampleJobs[i], UserId: newUser.id });
+    }
+
     const foundJob = await Job.findOne({
       where: {
         title: "Software Engineer",
-        employer: "Google",
+        employer: "Home Depot",
       },
     });
 
