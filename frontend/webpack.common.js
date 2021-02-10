@@ -1,5 +1,14 @@
 const path = require("path");
 const webpack = require("webpack");
+const Dotenv = require("dotenv-webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const dev = process.env.NODE_ENV !== "production";
+
+const webPackplugins = [new webpack.HotModuleReplacementPlugin(), new Dotenv()];
+
+if (!dev) {
+  webPackplugins.push(new MiniCssExtractPlugin());
+}
 
 module.exports = {
   entry: ["react-hot-loader/patch", "./src/index.js"],
@@ -19,9 +28,19 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: "style-loader",
-          },
+          dev
+            ? {
+                loader: "style-loader",
+              }
+            : {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: true,
+                  modules: {
+                    namedExport: true,
+                  },
+                },
+              },
           {
             loader: "css-loader",
             options: {
@@ -39,5 +58,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: webPackplugins,
 };
