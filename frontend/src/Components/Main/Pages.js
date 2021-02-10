@@ -11,9 +11,9 @@ export default function Pages() {
   return (
     <Fragment>
       <Switch>
-        <Route path="/map">
+        <PrivateRoute path="/map">
           <Layout Body={MapBox} />
-        </Route>
+        </PrivateRoute>
         <PrivateRoute path="/jobs">
           <Layout Body={Jobs} />
         </PrivateRoute>

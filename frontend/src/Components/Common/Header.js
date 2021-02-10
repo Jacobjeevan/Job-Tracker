@@ -1,10 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { loadDefaultUser, logout } from "../Auth/authAPI";
 import { AppContext } from "./AppContext";
 
+const getTestUserMsg = () => {
+  return (
+    <div className="flex-1 text-center font-playfair">
+      {
+        "You are currently logged in as a test user. Some functionality is disabled"
+      }
+    </div>
+  );
+};
+
 export default function Header() {
-  const { clearUser, token, storeAuth } = useContext(AppContext);
+  const { clearUser, token, storeAuth, user } = useContext(AppContext);
+  const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    if (user && user.email === "testuser@test.com") {
+      setMessage(getTestUserMsg());
+    } else {
+      setMessage(null);
+    }
+  }, [user]);
 
   const handleLogout = async () => {
     await logout(token);
@@ -72,7 +91,7 @@ export default function Header() {
     <div className="flex-initial flex flex-col space-y-10">
       <Link
         to="/"
-        className="flex-1 px-20 pt-20 pb-10 text-center text-6xl hover:text-blue-600 italic font-bold font-playfair"
+        className="flex-1 px-20 pt-16 pb-10 text-center text-6xl hover:text-blue-600 italic font-bold font-playfair"
       >
         Job Tracker
       </Link>
@@ -80,6 +99,7 @@ export default function Header() {
         Keep track of your job apps, the easy way.
       </div>
       {token ? authLinks : guestLinks}
+      {message}
     </div>
   );
 }
