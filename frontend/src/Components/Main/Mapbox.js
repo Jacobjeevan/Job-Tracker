@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useContext, useRef } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import "./map.css";
 import { AppContext } from "../Common/AppContext";
 import mapboxgl from "mapbox-gl";
@@ -65,7 +65,7 @@ export default function Mapbox() {
   }, [jobs]);
 
   return (
-    <div className="w-2/5 h-3/5">
+    <div className="map w-2/5 h-3/5">
       <div ref={mapContainer} className="mapContainer" />
     </div>
   );
