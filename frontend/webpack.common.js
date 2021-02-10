@@ -4,7 +4,10 @@ const Dotenv = require("dotenv-webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const dev = process.env.NODE_ENV !== "production";
 
-const webPackplugins = [new webpack.HotModuleReplacementPlugin(), new Dotenv()];
+const webPackplugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new Dotenv({ path: dev ? "./env" : "./env.prod" }),
+];
 
 if (!dev) {
   webPackplugins.push(new MiniCssExtractPlugin());
