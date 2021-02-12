@@ -1,8 +1,8 @@
 version: "3"
 services:
-  nginx:
+  web:
     build: .
     ports:
-      - 8080:80
+      - 5003:5003
     env_file:
-      - .env
+      - .env.prod

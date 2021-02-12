@@ -2,34 +2,39 @@ FROM node:15.7.0-alpine3.12 as buildstage
 
 WORKDIR /frontend
 
+ARG REACT_APP_BACKEND_URL
+
+ARG REACT_APP_MAPBOX_KEY
+
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY . .
+
+ENV NODE_ENV production
+
+RUN echo "REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}" >> .env.prod \
+ echo "REACT_APP_MAPBOX_KEY=${REACT_APP_MAPBOX_KEY}" >> .env.prod
 
 RUN npm run build
 
 
-FROM alpine
+FROM node:15.7.0-alpine3.12
+
+EXPOSE 5003
 
 WORKDIR /frontend
 
 # Adding bash, in run within container
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash nginx
 
-COPY --from=buildstage /frontend/dist .
+COPY --from=buildstage /frontend/dist ./dist
 
-RUN touch .static
+COPY --from=buildstage /frontend/package*.json ./
 
-# Uncomment below to run locally with nginx
+COPY --from=buildstage /frontend/server.js .
 
-#FROM nginx
+RUN npm i express
 
-#COPY --from=buildstage /frontend/dist /usr/share/nginx/html
-
-#RUN rm /etc/nginx/conf.d/default.conf
-
-#COPY nginx.conf /etc/nginx/nginx.conf
-
-#CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "start"]
