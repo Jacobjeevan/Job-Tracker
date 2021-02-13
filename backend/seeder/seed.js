@@ -8,8 +8,6 @@ if (process.env.NODE_ENV === "PRODUCTION") {
   dotenv.config({ path: "./.env" });
 }
 
-const connectDB = require("../server/db/dbHelper");
-
 const Job = require("../server/components/Job/JobModel");
 const Users = require("../server/components/User/UserModel");
 const JobRepo = require("../server/components/Job/JobRepo");
@@ -17,6 +15,12 @@ const UserRepo = require("../server/components/User/UserRepo");
 const Location = require("../server/components/Location/LocationModel");
 const { sampleJobs, userReq } = require("./seedData");
 const logger = require("../server/utils/logger");
+const dbConnection = require("../server/db/connection");
+
+(async () => {
+  await dbConnection.sync({ alter: true });
+  logger.info("Synced DB");
+})();
 
 const destroyData = async (exit) => {
   try {
@@ -65,8 +69,6 @@ const seedData = async (exit) => {
     process.exit(1);
   }
 };
-
-connectDB();
 
 if (process.argv[2] === "-d") {
   destroyData(true);
