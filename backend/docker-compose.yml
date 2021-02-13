@@ -18,6 +18,10 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5433:5432
+    environment:
+      - POSTGRES_DB=jobtracker_db
+      - POSTGRES_USER=jeevan
+      - POSTGRES_PASSWORD=localPassword
 
   db_test:
     image: postgres
@@ -26,8 +30,8 @@ services:
     ports:
       - 5434:5432
     environment:
-      - POSTGRES_DB=db_test
-      - POSTGRES_USER=jobtracker
+      - POSTGRES_DB=jobtracker_db_test
+      - POSTGRES_USER=jeevan
       - POSTGRES_PASSWORD=testPassword
 
 volumes:
