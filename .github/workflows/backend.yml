@@ -19,11 +19,6 @@ jobs:
     defaults:
       run:
         working-directory: "./backend/"
-    env:
-      DATABASE_URL: postgres://jeevan:testPassword@localhost:5434/jobtracker_db_test
-      TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
-      MAP_API_KEY: ${{ secrets.MAP_API_KEY }}
-      MAP_URL: ${{ secrets.MAP_URL }}
 
     steps:
       - uses: actions/checkout@v2
@@ -32,14 +27,10 @@ jobs:
       - run: npm ci
       - run: sudo docker-compose up -d db_test
       - run: |
-          export "DATABASE_URL=$DATABASE_URL"
-          export "TOKEN_SECRET=$TOKEN_SECRET"
-          export "MAP_API_KEY=$MAP_API_KEY"
-          export "MAP_URL=$MAP_URL"
           export NODE_ENV=TEST
           npx sequelize-cli db:migrate
           node seeder/seed.js -i
-      - run: npm test
+          npm test
 
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.6.0

@@ -3,7 +3,7 @@ const logger = require("../../utils/logger");
 
 async function fetchCoordinates(city, state) {
   try {
-    if (process.env !== "PRODUCTION") {
+    if (process.env.NODE_ENV === "PRODUCTION") {
       const response = await fetch(
         `${process.env.MAP_URL}?access_key=${process.env.MAP_API_KEY}&query=${city}, ${state}&limit=1`
       );
