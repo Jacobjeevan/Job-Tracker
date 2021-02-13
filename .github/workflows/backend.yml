@@ -19,22 +19,19 @@ jobs:
     defaults:
       run:
         working-directory: "./backend/"
+    env:
+      DATABASE_URL: postgres://jeevan:testPassword@localhost:5434/jobtracker_db_test
+      TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
+      MAP_API_KEY: ${{ secrets.MAP_API_KEY }}
+      MAP_URL: ${{ secrets.MAP_URL }}
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Setup Node.js environment
-        env:
-          DATABASE_URL: postgres://jeevan:testPassword@localhost:5434/jobtracker_db_test
-          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
-          MAP_API_KEY: ${{ secrets.MAP_API_KEY }}
-          MAP_URL: ${{ secrets.MAP_URL }}
-
         uses: actions/setup-node@v2.1.4
-
       - run: npm ci
       - run: sudo docker-compose up -d db_test
-      - run: | 
+      - run: |
           export "DATABASE_URL=$DATABASE_URL"
           export "TOKEN_SECRET=$TOKEN_SECRET"
           export "MAP_API_KEY=$MAP_API_KEY"
