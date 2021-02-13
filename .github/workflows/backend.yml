@@ -37,7 +37,8 @@ jobs:
           export "MAP_API_KEY=$MAP_API_KEY"
           export "MAP_URL=$MAP_URL"
           export NODE_ENV=TEST
-      - run: npx sequelize-cli db:migrate && node seeder/seed.js -i
+          npx sequelize-cli db:migrate
+          node seeder/seed.js -i
       - run: npm test
 
       - name: Git Auto Commit
