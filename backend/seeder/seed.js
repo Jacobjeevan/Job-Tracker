@@ -15,12 +15,6 @@ const UserRepo = require("../server/components/User/UserRepo");
 const Location = require("../server/components/Location/LocationModel");
 const { sampleJobs, userReq } = require("./seedData");
 const logger = require("../server/utils/logger");
-const dbConnection = require("../server/db/connection");
-
-(async () => {
-  await dbConnection.sync({ alter: true });
-  logger.info("Synced DB");
-})();
 
 const destroyData = async (exit) => {
   try {
