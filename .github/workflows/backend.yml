@@ -1,4 +1,4 @@
-name: backend
+name: backend_workflow
 
 on:
   push:
@@ -34,11 +34,12 @@ jobs:
 
       - run: npm ci
       - run: sudo docker-compose up -d db_test
-      - run: export "DATABASE_URL=$DATABASE_URL" \
-        export "TOKEN_SECRET=$TOKEN_SECRET" \
-        export "MAP_API_KEY=$MAP_API_KEY" \
-        export "MAP_URL=$MAP_URL" \
-        export NODE_ENV=TEST \
+      - run: | 
+          export "DATABASE_URL=$DATABASE_URL"
+          export "TOKEN_SECRET=$TOKEN_SECRET"
+          export "MAP_API_KEY=$MAP_API_KEY"
+          export "MAP_URL=$MAP_URL"
+          export NODE_ENV=TEST
       - run: node seeder/seed.js -i
       - run: npm test
 
