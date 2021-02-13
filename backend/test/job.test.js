@@ -60,20 +60,6 @@ const userReq = {
 
 let newJob;
 
-before((done) => {
-  dbConnection
-    .sync({ alter: true, force: true })
-    .then(() => {
-      logger.info("Successfully synced the DB");
-      done();
-    })
-    .catch((err) => {
-      logger.error("Error syncing the DB");
-      logger.error(err);
-      done(false);
-    });
-});
-
 describe("Jobs", () => {
   before(async () => {
     await Users.destroy({
