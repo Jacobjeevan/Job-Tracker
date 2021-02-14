@@ -1,0 +1,19 @@
+FROM node:14
+
+WORKDIR /backend
+
+COPY package*.json ./
+
+RUN npm ci
+
+COPY . .
+
+ENV NODE_ENV=TEST
+
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
+
+RUN chmod +x /wait
+
+RUN chmod +x ./entrypoint.sh
+
+CMD /wait && ./entrypoint.sh

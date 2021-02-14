@@ -25,13 +25,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.4
       - run: npm ci
-      - run: sudo docker-compose up -d db_test
-      - run: |
-          export NODE_ENV=TEST
-          npx sequelize-cli db:migrate
-          node seeder/seed.js -i
-          npm test
-
+      - run: sudo docker-compose up --build test_api
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v4.6.0
         with:

@@ -11,8 +11,8 @@
     "username": "jeevan",
     "password": "testPassword",
     "database": "jobtracker_db_test",
-    "host": "127.0.0.1",
-    "port": 5434,
+    "host": "db_test",
+    "port": 5432,
     "dialect": "postgres"
   },
   "PRODUCTION": {
