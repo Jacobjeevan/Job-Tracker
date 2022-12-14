@@ -13,7 +13,7 @@ Refer to [Plan](docs/plan.md) for detailed implementation plan of the project. Y
 
 ### Deployments :rocket:
 
-- [Job Tracker](https://jobtracker-react.herokuapp.com/): Deployed on Heroku
+- Job Tracker: ~~Deployed on Heroku~~ Taken down for maintenance.
 
 ### Progress:
 
